@@ -55,17 +55,17 @@ make test でテストを実行します。
 
 ## 第5章
 <dl>
-<dt>cat.c</dt>
+<dt>cat.c</dt> [my cat.c](./mysoln/cat.c)
 <dd>簡単なcatコマンド (システムコール版)</dd>
 
 <dt>cat0.c</dt>
 <dd>cat.cからエラー処理を取り除いたコード</dd>
 
-<dt>cat3.c</dt>
+<dt>cat3.c</dt> [my soln cat3.c](./mysoln/cat3.c)
 <dd>問題5-1の解答例。
 コマンドライン引数がないときはstdinを読むcatコマンド</dd>
 
-<dt>wc-l-syscall.c</dt>
+<dt>wc-l-syscall.c</dt> [my soln wc-l-syscall.c](./mysoln/wc-l-syscall.c)
 <dd>問題5-2の解答例。
 標準入力からテキストを読み込み、その行数を表示する。</dd>
 </dl>
