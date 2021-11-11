@@ -55,17 +55,17 @@ make test でテストを実行します。
 
 ## 第5章
 <dl>
-<dt>cat.c</dt>
+<dt>cat.c</dt> [my cat.c](./mysoln/cat.c)
 <dd>簡単なcatコマンド (システムコール版)</dd>
 
 <dt>cat0.c</dt>
 <dd>cat.cからエラー処理を取り除いたコード</dd>
 
-<dt>cat3.c</dt>
+<dt>cat3.c</dt> [my soln cat3.c](./mysoln/cat3.c)
 <dd>問題5-1の解答例。
 コマンドライン引数がないときはstdinを読むcatコマンド</dd>
 
-<dt>wc-l-syscall.c</dt>
+<dt>wc-l-syscall.c</dt> [my soln wc-l-syscall.c](./mysoln/wc-l-syscall.c)
 <dd>問題5-2の解答例。
 標準入力からテキストを読み込み、その行数を表示する。</dd>
 </dl>
@@ -322,6 +322,27 @@ stdinしか読めない。
 <dt>httpd2.c</dt>
 <dd>本章で作成したお手軽HTTPサーバ。
 自分でデーモン化とソケット接続が可能。</dd>
+
+```
+$ sudo ./httpd2 --port=8080 --chroot --user=arch --group=users .
+$ nc localhost 8080
+GET /hello.c HTTP/1.0
+
+HTTP/1.0 200 OK
+Date: Mon, 23 Sep 2019 11:09:39 GMT
+Server: LittleHTTP/1.0
+Connection: close
+Content-Length: 104
+Content-Type: text/plain
+
+#include <stdio.h>
+
+int main(int argc, char const* argv[])
+{
+    printf("Hello World");
+    return 0;
+}
+```
 
 <dt>logging.c</dt>
 <dd>syslog(3)のテストプログラム。</dd>
