@@ -31,7 +31,7 @@ static uid_t
 get_user_id(char *user)
 {
     struct passwd *pw = getpwnam(user);
-    if (!pw) {
+    if (pw == NULL) {
         fprintf(stderr, "no such user: %s\n", user);
         exit(1);
     }

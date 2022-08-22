@@ -98,7 +98,7 @@ exec_pipeline(struct cmd *cmdhead)
     int fds1[2] = {-1, -1};
     int fds2[2] = {-1, -1};
 
-    for (struct cmd *cmd = cmdhead; cmd && !REDIRECT_P(cmd); cmd = cmd->next) {
+    for (struct cmd *cmd = cmdhead; (cmd != NULL) && (!REDIRECT_P(cmd)); cmd = cmd->next) {
         fds1[0] = fds2[0];
         fds1[1] = fds2[1];
         if (! TAIL_P(cmd)) {
@@ -160,7 +160,7 @@ redirect_stdout(char *path)
 static int
 wait_pipeline(struct cmd *cmdhead)
 {
-    for (struct cmd *cmd = cmdhead; cmd && !REDIRECT_P(cmd); cmd = cmd->next) {
+    for (struct cmd *cmd = cmdhead; (cmd != NULL) && (!REDIRECT_P(cmd)); cmd = cmd->next) {
         if (BUILTIN_P(cmd))
             cmd->status = lookup_builtin(cmd->argv[0])->f(cmd->argc, cmd->argv);
         else
@@ -226,7 +226,7 @@ parse_command_line(char *p)
     return cmd;
 
   parse_error:
-    if (cmd) free_cmd(cmd);
+    if (cmd != NULL) free_cmd(cmd);
     return NULL;
 }
 
@@ -249,7 +249,7 @@ struct builtin builtins_list[] = {
 static struct builtin*
 lookup_builtin(char *cmd)
 {
-    for (struct builtin *p = builtins_list; p->name; p++) {
+    for (struct builtin *p = builtins_list; p->name != NULL; p++) {
         if (strcmp(cmd, p->name) == 0)
             return p;
     }
@@ -278,7 +278,7 @@ builtin_pwd(int argc, char *argv[])
         return 1;
     }
     char buf[PATH_MAX];
-    if (!getcwd(buf, PATH_MAX)) {
+    if (getcwd(buf, PATH_MAX) == NULL) {
         fprintf(stderr, "%s: cannot get working directory\n", argv[0]);
         return 1;
     }
@@ -300,7 +300,7 @@ static void*
 xmalloc(size_t sz)
 {
     void *p = calloc(1, sz);
-    if (!p)
+    if (p == NULL)
         exit(3);
     return p;
 }
@@ -308,9 +308,9 @@ xmalloc(size_t sz)
 static void*
 xrealloc(void *ptr, size_t sz)
 {
-    if (!ptr) return xmalloc(sz);
+    if (ptr == NULL) return xmalloc(sz);
     void *p = realloc(ptr, sz);
-    if (!p)
+    if (p == NULL)
         exit(3);
     return p;
 }

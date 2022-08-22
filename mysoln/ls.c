@@ -19,12 +19,12 @@ int main(int argc, char *argv[])
 
 static void do_ls(char *path) {
     DIR *d = opendir(path);
-    if (!d) {
+    if (d == NULL) {
         perror(path);
         exit(1);
     }
     struct dirent *ent;
-    while (ent = readdir(d)) {
+    while ((ent = readdir(d)) != NULL) {
         printf("%s\n", ent->d_name);
     }
     closedir(d);

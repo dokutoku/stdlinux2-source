@@ -32,7 +32,7 @@ static gid_t
 get_group_id(char *group)
 {
     struct group *gr = getgrnam(group);
-    if (!gr) {
+    if (gr == NULL) {
         fprintf(stderr, "no such group: %s\n", group);
         exit(1);
     }

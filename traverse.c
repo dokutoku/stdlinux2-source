@@ -45,7 +45,7 @@ static void
 traverse0(struct strbuf *pathbuf, int first)
 {
     DIR *d = opendir(pathbuf->ptr);
-    if (!d) {
+    if (d == NULL) {
         switch (errno) {
         case ENOTDIR:   /* might be replaced after last readdir(). */
             return;
@@ -70,7 +70,7 @@ traverse0(struct strbuf *pathbuf, int first)
     puts(pathbuf->ptr);
     struct stat st;
     struct dirent *ent;
-    while (ent = readdir(d)) {
+    while ((ent = readdir(d)) != NULL) {
         if (strcmp(ent->d_name, ".") == 0) continue;
         if (strcmp(ent->d_name, "..") == 0) continue;
         strbuf_realloc(pathbuf, pathbuf->len + 1 + strlen(ent->d_name) + 1);
@@ -110,12 +110,12 @@ static struct strbuf*
 strbuf_new(void)
 {
     struct strbuf *buf = (struct strbuf*)malloc(sizeof(struct strbuf));
-    if (!buf) {
+    if (buf == NULL) {
         print_error("malloc(3)");
         exit(1);
     }
     buf->ptr = malloc(INITLEN);
-    if (!buf->ptr) {
+    if (buf->ptr == NULL) {
         print_error("malloc(3)");
         exit(1);
     }
@@ -128,7 +128,7 @@ strbuf_realloc(struct strbuf *buf, size_t len)
 {
     if (buf->len > len) return;
     char *tmp = realloc(buf->ptr, len);
-    if (!tmp) {
+    if (tmp == NULL) {
         print_error("realloc(3)");
         exit(1);
     }

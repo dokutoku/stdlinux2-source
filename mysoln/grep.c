@@ -26,7 +26,7 @@ int main(int argc, char const* argv[])
     } else {
         for (int i = 2; i < argc; i++) {
             FILE *f = fopen(argv[i], "r");
-            if (!f) {
+            if (f == NULL) {
                 perror(argv[i]);
                 exit(1);
             }
@@ -41,7 +41,7 @@ int main(int argc, char const* argv[])
 static void do_grep(regex_t *pat, FILE *src) {
     char buf[4096];
 
-    while (fgets(buf, sizeof buf, src)) {
+    while (fgets(buf, sizeof buf, src) != NULL) {
         if (regexec(pat, buf, 0, NULL, 0) == 0) {
             fputs(buf, stdout);
         }

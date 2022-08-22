@@ -40,7 +40,7 @@ main(int argc, char *argv[])
     else {
         for (int i = 2; i < argc; i++) {
             FILE *f = fopen(argv[i], "r");
-            if (!f) die(argv[i]);
+            if (f == NULL) die(argv[i]);
             do_grep(&pat, f);
             fclose(f);
         }
@@ -54,7 +54,7 @@ do_grep(regex_t *pat, FILE *src)
 {
     char *line;
 
-    while (line = get_line(src)) {
+    while ((line = get_line(src)) != NULL) {
         if (regexec(pat, line, 0, NULL, 0) == 0) {
             puts(line);
         }
@@ -70,7 +70,7 @@ get_line(FILE *src)
     /* バッファ */
     unsigned char *line = malloc(capa);
 
-    if (!line) die("malloc");
+    if (line == NULL) die("malloc");
 
     /* 現在のバッファ書き込み位置 */
     size_t idx = 0;
@@ -82,7 +82,7 @@ get_line(FILE *src)
         if (idx == capa - 1) {   /* バッファ長チェック */
             capa *= 2;
             line = realloc(line, capa);
-            if (!line) die("realloc");
+            if (line == NULL) die("realloc");
         }
         line[idx++] = (unsigned char)c;
     }

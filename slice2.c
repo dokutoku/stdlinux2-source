@@ -40,7 +40,7 @@ main(int argc, char *argv[])
     else {
         for (int i = 2; i < argc; i++) {
             FILE *f = fopen(argv[i], "r");
-            if (!f) die(argv[i]);
+            if (f == NULL) die(argv[i]);
             do_slice(&pat, f);
             fclose(f);
         }
@@ -53,7 +53,7 @@ static void
 do_slice(regex_t *pat, FILE *src)
 {
     char *line;
-    while (line = get_line(src)) {
+    while ((line = get_line(src)) != NULL) {
         regmatch_t matched[1];
         if (regexec(pat, line, 1, matched, 0) == 0) {
             char *str = line + matched[0].rm_so;
@@ -73,7 +73,7 @@ get_line(FILE *src)
     /* バッファ */
     unsigned char *line = malloc(capa);
 
-    if (!line) die("malloc");
+    if (line == NULL) die("malloc");
 
     /* 現在のバッファ書き込み位置 */
     size_t idx = 0;
@@ -85,7 +85,7 @@ get_line(FILE *src)
         if (idx == capa - 1) {   /* バッファ長チェック */
             capa *= 2;
             line = realloc(line, capa);
-            if (!line) die("realloc");
+            if (line == NULL) die("realloc");
         }
         line[idx++] = (unsigned char)c;
     }

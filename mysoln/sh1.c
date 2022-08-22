@@ -119,7 +119,7 @@ static void*
 xmalloc(size_t size)
 {
     void *p = malloc(size);
-    if (!p) {
+    if (p == NULL) {
         perror("malloc");
         exit(1);
     }
@@ -129,9 +129,9 @@ xmalloc(size_t size)
 static void*
 xrealloc(void *ptr, size_t size)
 {
-    if (!ptr) return xmalloc(size);
+    if (ptr == NULL) return xmalloc(size);
     void *p = realloc(ptr, size);
-    if (!p) {
+    if (p == NULL) {
         perror("realloc");
         exit(1);
     }

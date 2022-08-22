@@ -37,7 +37,7 @@ tail(FILE *f)
     long n_read_lines = 0;
 
     // Read all lines into ring buffer
-    while (fgets(ring_buffer[curr], MAX_LINE_LENGTH, f)) {
+    while (fgets(ring_buffer[curr], MAX_LINE_LENGTH, f) != NULL) {
         RING_BUFFER_INC(curr);
         n_read_lines++;
     }

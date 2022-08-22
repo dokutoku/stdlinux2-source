@@ -6,7 +6,7 @@ main(int argc, char *argv[])
 {
     for (int i = 1; i < argc; i++) {
         char *val = getenv(argv[i]);
-        if (val) printf("%s\n", val);
+        if (val != NULL) printf("%s\n", val);
     }
     exit(0);
 }

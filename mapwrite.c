@@ -28,7 +28,7 @@ main(int argc, char *argv[])
         exit(1);
     }
     char *ptr = (char*)mmap(0, len, PROT_WRITE, MAP_SHARED, fd, 0);
-    if (!ptr) {
+    if (ptr == NULL) {
         perror("mmap(2)");
         exit(1);
     }

@@ -5,7 +5,7 @@ int main(int argc, char const* argv[])
 {
     for (int i = 1; i < argc; i++) {
         FILE *f = fopen(argv[i], "r");
-        if (!f) {
+        if (f == NULL) {
             perror(argv[i]);
             exit(1);
         }

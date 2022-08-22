@@ -11,15 +11,15 @@ my_getcwd(void)
     size_t size = INIT_BUFSIZE;
 
     char *buf = malloc(size);
-    if (!buf) return NULL;
+    if (buf == NULL) return NULL;
     for (;;) {
         errno = 0;
-        if (getcwd(buf, size))
+        if (getcwd(buf, size) != NULL)
             return buf;
         if (errno != ERANGE) break;
         size *= 2;
         char *tmp = realloc(buf, size);
-        if (!tmp) break;
+        if (tmp == NULL) break;
         buf = tmp;
     }
     free(buf);
@@ -30,7 +30,7 @@ int
 main(int argc, char *argv[])
 {
     char *path = my_getcwd();
-    if (!path) {
+    if (path == NULL) {
         perror("getcwd");
         exit(1);
     }

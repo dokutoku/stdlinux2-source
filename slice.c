@@ -38,7 +38,7 @@ main(int argc, char *argv[])
     else {
         for (int i = 2; i < argc; i++) {
             FILE *f = fopen(argv[i], "r");
-            if (!f) {
+            if (f == NULL) {
                 perror(argv[i]);
                 exit(1);
             }
@@ -55,7 +55,7 @@ do_slice(regex_t *pat, FILE *src)
 {
     char buf[4096];
 
-    while (fgets(buf, sizeof buf, src)) {
+    while (fgets(buf, sizeof buf, src) != NULL) {
         regmatch_t matched[1];
         if (regexec(pat, buf, 1, matched, 0) == 0) {
             char *str = buf + matched[0].rm_so;

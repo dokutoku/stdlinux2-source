@@ -12,7 +12,7 @@ main(int argc, char *argv[])
         exit(1);
     }
     struct passwd *pw = getpwnam(argv[1]);
-    if (!pw) {
+    if (pw == NULL) {
         perror(argv[1]);
         exit(1);
     }

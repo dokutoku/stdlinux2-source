@@ -22,12 +22,12 @@ static void
 do_ls(char *path)
 {
     DIR *d = opendir(path);          /* (1) */
-    if (!d) {
+    if (d == NULL) {
         perror(path);
         exit(1);
     }
     struct dirent *ent;
-    while (ent = readdir(d)) {  /* (2) */
+    while ((ent = readdir(d)) != NULL) {  /* (2) */
         printf("%s\n", ent->d_name);
     }
     closedir(d);                /* (1') */

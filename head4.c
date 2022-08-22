@@ -42,7 +42,7 @@ main(int argc, char *argv[])
         /* (7') */
         for (int i = optind; i < argc; i++) {
             FILE *f = fopen(argv[i], "r");
-            if (!f) {
+            if (f == NULL) {
                 perror(argv[i]);
                 exit(1);
             }

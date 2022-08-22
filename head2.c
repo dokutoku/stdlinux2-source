@@ -16,7 +16,7 @@ main(int argc, char *argv[])
     } else {    /* この節が追加された */
         for (int i = 2; i < argc; i++) {
             FILE *f = fopen(argv[i], "r");
-            if (!f) {
+            if (f == NULL) {
                 perror(argv[i]);
                 exit(1);
             }

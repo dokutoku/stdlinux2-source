@@ -29,7 +29,7 @@ static void tail(FILE *f) {
     long curr = 0;
     long n_read_lines = 0;
 
-    while (fgets(ring_buffer[curr], MAX_LINE_LENGTH, f)) {
+    while (fgets(ring_buffer[curr], MAX_LINE_LENGTH, f) != NULL) {
         RING_BUFFER_INC(curr);
         n_read_lines++;
     }

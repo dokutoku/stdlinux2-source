@@ -45,7 +45,7 @@ make_path(const char *path)
     else if (errno == ENOENT) {
         // Parent path is not a directory.  Make it
         char *parent_path = strdup(path);
-        if (!parent_path) die("strdup");
+        if (parent_path == NULL) die("strdup");
 
         // Removes duplicated trailing slashes ('/')
         char *last = parent_path + strlen(parent_path) - 1;
@@ -59,7 +59,7 @@ make_path(const char *path)
         }
 
         char *sep = strrchr(parent_path, '/');
-        if (!sep) {
+        if (sep == NULL) {
             // No slash ('/') found.  e.g. "component"
             fprintf(stderr, "error: current directory is not a directory???\n");
             exit(1);

@@ -67,7 +67,7 @@ listen_socket(int port)
         fprintf(stderr, "%s\n", gai_strerror(err));
         exit(1);
     }
-    for (struct addrinfo *ai = res; ai; ai = ai->ai_next) {
+    for (struct addrinfo *ai = res; ai != NULL; ai = ai->ai_next) {
         int sock = socket(ai->ai_family, ai->ai_socktype, ai->ai_protocol);
         if (sock < 0) continue;
         if (bind(sock, ai->ai_addr, ai->ai_addrlen) < 0) {

@@ -30,7 +30,7 @@ main(int argc, char *argv[])
         else
             puts(buf);
 
-        if (strchr(opt_E, *p)) {
+        if (strchr(opt_E, *p) != NULL) {
             printf("%%E%c=", *p);
             fmt[0] = '"';
             fmt[1] = '%';
@@ -43,7 +43,7 @@ main(int argc, char *argv[])
             else
                 puts(buf);
         }
-        if (strchr(opt_O, *p)) {
+        if (strchr(opt_O, *p) != NULL) {
             printf("%%O%c=", *p);
             fmt[0] = '"';
             fmt[1] = '%';

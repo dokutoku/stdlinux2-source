@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
     } else {
         for (int i = optind; i < argc; i++) {
             FILE *f = fopen(argv[i], "r");
-            if (!f) {
+            if (f == NULL) {
                 perror(argv[i]);
                 exit(1);
             }

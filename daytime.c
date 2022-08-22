@@ -13,7 +13,7 @@ main(int argc, char *argv[])
 {
     int sock = open_connection((argc>1 ? argv[1] : "localhost"), "daytime");
     FILE *f = fdopen(sock, "r");
-    if (!f) {
+    if (f == NULL) {
         perror("fdopen(3)");
         exit(1);
     }
@@ -37,7 +37,7 @@ open_connection(char *host, char *service)
         fprintf(stderr, "getaddrinfo(3): %s\n", gai_strerror(err));
         exit(1);
     }
-    for (struct addrinfo *ai = res; ai; ai = ai->ai_next) {
+    for (struct addrinfo *ai = res; ai != NULL; ai = ai->ai_next) {
         int sock = socket(ai->ai_family, ai->ai_socktype, ai->ai_protocol);
         if (sock < 0) {
             continue;

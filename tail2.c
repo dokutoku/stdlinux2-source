@@ -34,14 +34,14 @@ tail(FILE *f, int nlines)
     if (ringbuf == NULL) exit(1);
     unsigned char **p = ringbuf;
     unsigned char *line;
-    while (line = readline(f)) {
-        if (*p)
+    while ((line = readline(f)) != NULL) {
+        if (*p != NULL)
             free(*p);
         *p = line;
         INC(p);
     }
     if (*p == NULL) p = ringbuf;
-    for (int n = nlines; n > 0 && *p; n--) {
+    for (int n = nlines; (n > 0) && (*p != NULL); n--) {
         printf("%s", *p);
         free(*p);
         INC(p);

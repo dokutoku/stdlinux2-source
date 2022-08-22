@@ -149,12 +149,12 @@ int main(int argc, char *argv[])
 }
 
 static void setup_environment(char *root, char *user, char *group) {
-    if (!user || !group) {
+    if ((user == NULL) || (group == NULL)) {
         fprintf(stderr, "user both of --user and --group\n");
         exit(1);
     }
     struct group *gr = getgrnam(group);
-    if (!gr) {
+    if (gr == NULL) {
         fprintf(stderr, "no such group: %s\n", group);
     }
     if (setgid(gr->gr_gid) < 0) {
@@ -166,7 +166,7 @@ static void setup_environment(char *root, char *user, char *group) {
         exit(1);
     }
     struct passwd *pw = getpwnam(user);
-    if (!pw) {
+    if (pw == NULL) {
         fprintf(stderr, "no such user: %s\n", user);
         exit(1);
     }
@@ -232,7 +232,7 @@ static int listen_socket(char *port) {
     struct addrinfo *res;
     if ((err = getaddrinfo(NULL, port, &hints, &res)) != 0)
         log_exit(gai_strerror(err));
-    for (struct addrinfo *ai = res; ai; ai = ai->ai_next) {
+    for (struct addrinfo *ai = res; ai != NULL; ai = ai->ai_next) {
         int sock = socket(ai->ai_family, ai->ai_socktype, ai->ai_protocol);
         if (sock < 0) continue;
         if (bind(sock, ai->ai_addr, ai->ai_addrlen) < 0) {
@@ -283,7 +283,7 @@ static struct HTTPRequest* read_request(FILE *in) {
     read_request_line(req, in);
     req->header = NULL;
     struct HTTPHeaderField *h;
-    while (h = read_header_field(in)) {
+    while ((h = read_header_field(in)) != NULL) {
         h->next = req->header;
         req->header = h;
     }
@@ -304,11 +304,11 @@ static struct HTTPRequest* read_request(FILE *in) {
 static void read_request_line(struct HTTPRequest *req, FILE *in) {
     char buf[LINE_BUF_SIZE];
 
-    if (!fgets(buf, LINE_BUF_SIZE, in)) {
+    if (fgets(buf, LINE_BUF_SIZE, in) == NULL) {
         log_exit("no request line");
     }
     char *p = strchr(buf, ' ');
-    if (!p) log_exit("parse error on request line (1): %s", buf);
+    if (p == NULL) log_exit("parse error on request line (1): %s", buf);
     *p++ = '\0';
     req->method = xmalloc(p - buf);
     strcpy(req->method, buf);
@@ -316,7 +316,7 @@ static void read_request_line(struct HTTPRequest *req, FILE *in) {
 
     char *path = p;
     p = strchr(path, ' ');
-    if (!p) log_exit("parse error on request line (2): %s", buf);
+    if (p == NULL) log_exit("parse error on request line (2): %s", buf);
     *p++ = '\0';
     req->path = xmalloc(p - path);
     strcpy(req->path, path);
@@ -330,13 +330,13 @@ static void read_request_line(struct HTTPRequest *req, FILE *in) {
 static struct HTTPHeaderField* read_header_field(FILE *in) {
     char buf[LINE_BUF_SIZE];
 
-    if (!fgets(buf, LINE_BUF_SIZE, in))
+    if (fgets(buf, LINE_BUF_SIZE, in) == NULL)
         log_exit("failed to read request header field: %s", strerror(errno));
     if ((buf[0] == '\n') || (strcmp(buf, "\r\n") == 0))
         return NULL;
 
     char *p = strchr(buf, ':');
-    if (!p) log_exit("parse error on request header field: %s", buf);
+    if (p == NULL) log_exit("parse error on request header field: %s", buf);
     *p++ = '\0';
     struct HTTPHeaderField *h = xmalloc(sizeof(struct HTTPHeaderField));
     h->name = xmalloc(p - buf);
@@ -357,7 +357,7 @@ static void upcase(char *str) {
 
 static void free_request(struct HTTPRequest *req) {
     struct HTTPHeaderField *head = req->header;
-    while (head) {
+    while (head != NULL) {
         struct HTTPHeaderField *h = head;
         head = head->next;
         free(h->name);
@@ -372,14 +372,14 @@ static void free_request(struct HTTPRequest *req) {
 
 static long content_length(struct HTTPRequest *req) {
     char *val = lookup_header_field_value(req, "Content-Length");
-    if (!val) return 0;
+    if (val == NULL) return 0;
     long len = atoi(val);
     if (len < 0) log_exit("negative Content-Length value");
     return len;
 }
 
 static char* lookup_header_field_value(struct HTTPRequest *req, char *name) {
-    for (struct HTTPHeaderField *h = req->header; h; h = h->next) {
+    for (struct HTTPHeaderField *h = req->header; h != NULL; h = h->next) {
         if (strcasecmp(h->name, name) == 0)
             return h->value;
     }
@@ -477,7 +477,7 @@ static void not_found(struct HTTPRequest *req, FILE *out) {
 static void output_common_header_fields(struct HTTPRequest *req, FILE *out, char *status) {
     time_t t = time(NULL);
     struct tm *tm = gmtime(&t);
-    if (!tm) log_exit("gmtime() failed: %s", strerror(errno));
+    if (tm == NULL) log_exit("gmtime() failed: %s", strerror(errno));
     char buf[TIME_BUF_SIZE];
     strftime(buf, TIME_BUF_SIZE, "%a, %d %b %Y %H:%M:%S GMT", tm);
     fprintf(out, "HTTP/1.%d %s\r\n", HTTP_MINOR_VERSION, status);
@@ -515,7 +515,7 @@ static char* guess_content_type(struct FileInfo *info) {
 
 static void* xmalloc(size_t sz) {
     void *p = malloc(sz);
-    if (!p) log_exit("failed to allocate memory");
+    if (p == NULL) log_exit("failed to allocate memory");
     return p;
 }
 

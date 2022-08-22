@@ -28,12 +28,12 @@ static void
 do_ls(char *path)
 {
     DIR *d = opendir(path);
-    if (!d) {
+    if (d == NULL) {
         perror(path);
         exit(1);
     }
     struct dirent *ent;
-    while (ent = readdir(d)) {
+    while ((ent = readdir(d)) != NULL) {
         char *buf = allocate_path_buffer(strlen(path) + 1 + strlen(ent->d_name));
         // sprintf does NOT cause buffer overflow here, because we calculate required buffer length beforehand.
         sprintf(buf, "%s/%s", path, ent->d_name);
@@ -44,7 +44,7 @@ do_ls(char *path)
         mtime[strlen(mtime) - 1] = '\0';   // ctime returns a string terminated by '\n', remove it
 
         struct passwd *pw = getpwuid(st.st_uid);
-        if (pw) {   // passwd entry found
+        if (pw != NULL) {   // passwd entry found
             printf("%s owner=%s mtime=%s\n", ent->d_name, pw->pw_name, mtime);
         }
         else {
@@ -65,13 +65,13 @@ allocate_path_buffer(size_t required_len)
         len += 1024;
     }
     if (len > path_len) {
-        if (!file_path) {
+        if (file_path == NULL) {
             file_path = malloc(len);
-            if (!file_path) die("malloc");
+            if (file_path == NULL) die("malloc");
         }
         else {
             char *tmp = realloc(file_path, len);
-            if (!tmp) die("realloc");
+            if (tmp == NULL) die("realloc");
             file_path = tmp;
         }
     }

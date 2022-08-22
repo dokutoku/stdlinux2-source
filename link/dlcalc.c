@@ -9,7 +9,7 @@ int
 main(int argc, char *argv[])
 {
     void *libm = dlopen("libm.so", RTLD_NOW);
-    if (!libm) {
+    if (libm == NULL) {
         fprintf(stderr, "dlopen failed");
         exit(1);
     }

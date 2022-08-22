@@ -73,7 +73,7 @@ static void
 grep_file(regex_t *re, char *path)
 {
     FILE *f = fopen(path, "r");
-    if (!f) {
+    if (f == NULL) {
         perror(path);
         exit(1);
     }
@@ -89,7 +89,7 @@ grep_stream(regex_t *re, FILE *f)
 {
     char buf[4096];
 
-    while (fgets(buf, sizeof buf, f)) {
+    while (fgets(buf, sizeof buf, f) != NULL) {
         int matched = (regexec(re, buf, 0, NULL, 0) == 0);
         if (opt_invert) {
             matched = !matched;

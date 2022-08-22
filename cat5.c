@@ -24,7 +24,7 @@ do_cat(const char *path)
 {
     unsigned char buf[BUFFER_SIZE];
     FILE *f = fopen(path, "r");
-    if (!f) die(path);
+    if (f == NULL) die(path);
     for (;;) {
         size_t n_read = fread(buf, 1, sizeof buf, f);
         if (ferror(f)) die(path);

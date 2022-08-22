@@ -34,7 +34,7 @@ main(int argc, char *argv[])
     else {
         for (int i = 2; i < argc; i++) {
             FILE *f = fopen(argv[i], "r");
-            if (!f) {
+            if (f == NULL) {
                 perror(argv[i]);
                 exit(1);
             }
@@ -51,12 +51,12 @@ do_grep(wchar_t *pattern, FILE *src)
     char buf[4096];
     wchar_t wbuf[4096];
 
-    while (fgets(buf, sizeof buf, src)) {
+    while (fgets(buf, sizeof buf, src) != NULL) {
         if (mbstowcs(wbuf, buf, 4096) == (size_t)(-1)) {
             fprintf(stderr, "mbstowcs failed #2\n");
             exit(1);
         }
-        if (wcsstr(wbuf, pattern)) {
+        if (wcsstr(wbuf, pattern) != NULL) {
             fputs(buf, stdout);
         }
     }
