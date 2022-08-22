@@ -15,13 +15,11 @@ static void die(const char *s);
 int
 main(int argc, char *argv[])
 {
-    int i;
-
     if (argc < 2) {
         fprintf(stderr, "%s: file name not given\n", argv[0]);
         exit(1);
     }
-    for (i = 1; i < argc; i++) {
+    for (int i = 1; i < argc; i++) {
         char *path = argv[i];
         int fd = open(path, O_RDONLY);
         if (fd < 0) die(path);
@@ -42,8 +40,7 @@ do_word_count(int fd, const char *path)
         int n = read(fd, buf, sizeof buf);
         if (n < 0) die(path);
         if (n == 0) break;
-        unsigned long i;
-        for (i = 0; i < n; i++) {
+        for (unsigned long i = 0; i < n; i++) {
             if (buf[i] == '\n') {
                 count++;
             }

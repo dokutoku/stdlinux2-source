@@ -7,9 +7,7 @@ static void
 readshow(int fd)
 {
     char buf[8];
-    int n;
-
-    n = read(fd, buf, 1);
+    int n = read(fd, buf, 1);
     if (n < 0) {
         perror("read");
         exit(1);
@@ -32,9 +30,7 @@ readshow(int fd)
 int
 main(int argc, char *argv[])
 {
-    int newfd;
-
-    newfd = dup(0);
+    int newfd = dup(0);
     for (;;) {
         readshow(0);
         readshow(newfd);

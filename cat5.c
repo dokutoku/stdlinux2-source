@@ -11,8 +11,7 @@ main(int argc, char *argv[])
         fprintf(stderr, "%s: file name not given\n", argv[0]);
         exit(1);
     }
-    int i;
-    for (i = 1; i < argc; i++) {
+    for (int i = 1; i < argc; i++) {
         do_cat(argv[i]);
     }
     exit(0);

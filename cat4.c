@@ -19,7 +19,6 @@ main(int argc, char *argv[])
 {
     int opt;
     int escape = 0;
-    int i;
 
     while ((opt = getopt(argc, argv, "e")) != -1) {
         switch (opt) {
@@ -37,10 +36,8 @@ main(int argc, char *argv[])
         do_cat(stdin, escape);
     }
     else {
-        for (i = 0; i < argc; i++) {
-            FILE *f;
-
-            f = fopen(argv[i], "r");
+        for (int i = 0; i < argc; i++) {
+            FILE *f = fopen(argv[i], "r");
             if (!f) {
                 perror(argv[i]);
                 exit(1);

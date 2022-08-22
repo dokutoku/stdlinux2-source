@@ -8,10 +8,9 @@
 char*
 my_getcwd(void)
 {
-    char *buf, *tmp;
     size_t size = INIT_BUFSIZE;
 
-    buf = malloc(size);
+    char *buf = malloc(size);
     if (!buf) return NULL;
     for (;;) {
         errno = 0;
@@ -19,7 +18,7 @@ my_getcwd(void)
             return buf;
         if (errno != ERANGE) break;
         size *= 2;
-        tmp = realloc(buf, size);
+        char *tmp = realloc(buf, size);
         if (!tmp) break;
         buf = tmp;
     }
@@ -30,9 +29,7 @@ my_getcwd(void)
 int
 main(int argc, char *argv[])
 {
-    char *path;
-
-    path = my_getcwd();
+    char *path = my_getcwd();
     if (!path) {
         perror("getcwd");
         exit(1);

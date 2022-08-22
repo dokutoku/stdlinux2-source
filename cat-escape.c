@@ -20,9 +20,7 @@ main(int argc, char *argv[])
         do_cat(stdin);
     }
     else {
-        int i;
-
-        for (i = 1; i < argc; i++) {
+        for (int i = 1; i < argc; i++) {
             FILE *f = fopen(argv[i], "r");
             if (!f) {
                 perror(argv[i]);

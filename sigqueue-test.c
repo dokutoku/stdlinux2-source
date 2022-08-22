@@ -8,11 +8,12 @@ typedef void (*sighandler_t)(int);
 sighandler_t
 trap_signal(int sig, sighandler_t handler)
 {
-    struct sigaction act, old;
+    struct sigaction act;
 
     act.sa_handler = handler;
     sigemptyset(&act.sa_mask);
     act.sa_flags = SA_RESTART;
+    struct sigaction old;
     if (sigaction(sig, &act, &old) < 0)
         return NULL;
 

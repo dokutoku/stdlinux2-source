@@ -15,15 +15,12 @@ static gid_t get_group_id(char *group);
 int
 main(int argc, char *argv[])
 {
-    gid_t gid;
-    int i;
-
     if (argc < 2) {
         fprintf(stderr, "no group name given\n");
         exit(1);
     }
-    gid = get_group_id(argv[1]);
-    for (i = 2; i < argc; i++) {
+    gid_t gid = get_group_id(argv[1]);
+    for (int i = 2; i < argc; i++) {
         if (chown(argv[i], -1, gid) < 0) {
             perror(argv[i]);
         }
@@ -34,9 +31,7 @@ main(int argc, char *argv[])
 static gid_t
 get_group_id(char *group)
 {
-    struct group *gr;
-
-    gr = getgrnam(group);
+    struct group *gr = getgrnam(group);
     if (!gr) {
         fprintf(stderr, "no such group: %s\n", group);
         exit(1);

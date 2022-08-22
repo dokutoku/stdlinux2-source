@@ -37,8 +37,7 @@ int main(int argc, char* argv[])
         do_head(stdin, nlines);
     } else {
         for (int i = optind; i < argc; i++) {
-            FILE *f;
-            f = fopen(argv[i], "r");
+            FILE *f = fopen(argv[i], "r");
             if (!f) {
                 perror(argv[i]);
                 exit(1);
@@ -52,9 +51,8 @@ int main(int argc, char* argv[])
 }
 
 static void do_head(FILE *f, long nlines) {
-    int c;
-
     if (nlines <= 0) return;
+    int c;
     while ((c = getc(f)) != EOF) {
         if (putchar(c) < 0) exit(1);
         if (c == '\n') {

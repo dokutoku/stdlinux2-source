@@ -8,13 +8,10 @@
 int
 main(int argc, char *argv[])
 {
-    int fd;
+    int fd = open(argv[1], O_RDONLY);
     unsigned char buf[BUFSIZ];
-    int n;
-
-    fd = open(argv[1], O_RDONLY);
     for (;;) {
-        n = read(fd, buf, BUFSIZ);
+        int n = read(fd, buf, BUFSIZ);
         if (n == 0) break;
         n = write(STDOUT_FILENO, buf, n);
     }

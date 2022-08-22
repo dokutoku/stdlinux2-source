@@ -60,8 +60,7 @@ main(int argc, char *argv[])
         grep_stream(&re, stdin);
     }
     else {
-        int i;
-        for (i = 0; i < argc; i++) {
+        for (int i = 0; i < argc; i++) {
             grep_file(&re, argv[i]);
         }
     }
@@ -73,9 +72,7 @@ main(int argc, char *argv[])
 static void
 grep_file(regex_t *re, char *path)
 {
-    FILE *f;
-    
-    f = fopen(path, "r");
+    FILE *f = fopen(path, "r");
     if (!f) {
         perror(path);
         exit(1);
@@ -91,10 +88,9 @@ static void
 grep_stream(regex_t *re, FILE *f)
 {
     char buf[4096];
-    int matched;
 
     while (fgets(buf, sizeof buf, f)) {
-        matched = (regexec(re, buf, 0, NULL, 0) == 0);
+        int matched = (regexec(re, buf, 0, NULL, 0) == 0);
         if (opt_invert) {
             matched = !matched;
         }

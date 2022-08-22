@@ -7,13 +7,11 @@
 int
 main(int argc, char *argv[])
 {
-    pid_t pid;
-
     if (argc != 3) {
         fprintf(stderr, "Usage: %s <command> <arg>\n", argv[0]);
         exit(1);
     }
-    pid = fork();
+    pid_t pid = fork();
     if (pid < 0) {
         fprintf(stderr, "fork(2) failed\n");
         exit(1);

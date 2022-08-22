@@ -23,14 +23,11 @@ int main(int argc, char *argv[])
 #define BUFFER_SIZE 2048
 
 static void do_cat(const char *path) {
-    int fd;
-    unsigned char buf[BUFFER_SIZE];
-    int n;
-
-    fd = open(path, O_RDONLY);
+    int fd = open(path, O_RDONLY);
     if (fd < 0) die(path);
+    unsigned char buf[BUFFER_SIZE];
     for (;;) {
-        n = read(fd, buf, sizeof buf);
+        int n = read(fd, buf, sizeof buf);
         if (n < 0) die(path);
         if (n == 0) break;
         if (write(STDOUT_FILENO, buf, n) < 0) die(path);

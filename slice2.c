@@ -21,15 +21,12 @@ static void die(const char *s);
 int
 main(int argc, char *argv[])
 {
-    regex_t pat;
-    int err;
-    int i;
-
     if (argc < 2) {
         fputs("no pattern\n", stderr);
         exit(1);
     }
-    err = regcomp(&pat, argv[1], REG_EXTENDED | REG_NEWLINE);
+    regex_t pat;
+    int err = regcomp(&pat, argv[1], REG_EXTENDED | REG_NEWLINE);
     if (err != 0) {
         char buf[1024];
 
@@ -41,7 +38,7 @@ main(int argc, char *argv[])
         do_slice(&pat, stdin);
     }
     else {
-        for (i = 2; i < argc; i++) {
+        for (int i = 2; i < argc; i++) {
             FILE *f = fopen(argv[i], "r");
             if (!f) die(argv[i]);
             do_slice(&pat, f);
@@ -71,13 +68,17 @@ do_slice(regex_t *pat, FILE *src)
 static char*
 get_line(FILE *src)
 {
-    unsigned char *line;   /* バッファ */
     size_t capa = 160;     /* バッファサイズ */
-    size_t idx = 0;        /* 現在のバッファ書き込み位置 */
-    int c;
 
-    line = malloc(capa);
+    /* バッファ */
+    unsigned char *line = malloc(capa);
+
     if (!line) die("malloc");
+
+    /* 現在のバッファ書き込み位置 */
+    size_t idx = 0;
+
+    int c;
     while ((c = getc(src)) != EOF) {
         if (c == '\n')
             break;

@@ -31,11 +31,9 @@ main(int argc, char *argv[])
 {
     program_name = argv[0];
     for (;;) {
-        struct cmd *cmd;
-
         fprintf(stdout, PROMPT);
         fflush(stdout);
-        cmd = read_cmd();
+        struct cmd *cmd = read_cmd();
         if (cmd->argc > 0) {
             invoke_cmd(cmd);
         }
@@ -47,9 +45,7 @@ main(int argc, char *argv[])
 static void
 invoke_cmd(struct cmd *cmd)
 {
-    pid_t pid;
-    
-    pid = fork();
+    pid_t pid = fork();
     if (pid < 0) {
         perror("fork");
         exit(1);
@@ -85,9 +81,7 @@ static struct cmd*
 parse_cmd(char *cmdline)
 {
     char *p = cmdline;
-    struct cmd *cmd;
-
-    cmd = xmalloc(sizeof(struct cmd));
+    struct cmd *cmd = xmalloc(sizeof(struct cmd));
     cmd->argc = 0;
     cmd->argv = xmalloc(sizeof(char*) * INIT_CAPA);
     cmd->capa = INIT_CAPA;
@@ -121,9 +115,7 @@ free_cmd(struct cmd *cmd)
 static void*
 xmalloc(size_t size)
 {
-    void *p;
-
-    p = malloc(size);
+    void *p = malloc(size);
     if (!p) {
         perror("malloc");
         exit(1);
@@ -134,10 +126,8 @@ xmalloc(size_t size)
 static void*
 xrealloc(void *ptr, size_t size)
 {
-    void *p;
-
     if (!ptr) return xmalloc(size);
-    p = realloc(ptr, size);
+    void *p = realloc(ptr, size);
     if (!p) {
         perror("realloc");
         exit(1);

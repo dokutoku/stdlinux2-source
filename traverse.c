@@ -23,14 +23,12 @@ static char *program_name;  /* used by print_error() */
 int
 main(int argc, char *argv[])
 {
-    struct strbuf *pathbuf;
-
     if (argc != 2) {
         fprintf(stderr, "Usage: %s <dir>\n", argv[0]);
         exit(1);
     }
     program_name = argv[0];
-    pathbuf = strbuf_new();
+    struct strbuf *pathbuf = strbuf_new();
     strbuf_realloc(pathbuf, strlen(argv[1]));
     strcpy(pathbuf->ptr, argv[1]);
     traverse(pathbuf);
@@ -46,11 +44,7 @@ traverse(struct strbuf *pathbuf)
 static void
 traverse0(struct strbuf *pathbuf, int first)
 {
-    DIR *d;
-    struct dirent *ent;
-    struct stat st;
-
-    d = opendir(pathbuf->ptr);
+    DIR *d = opendir(pathbuf->ptr);
     if (!d) {
         switch (errno) {
         case ENOTDIR:   /* might be replaced after last readdir(). */
@@ -74,6 +68,8 @@ traverse0(struct strbuf *pathbuf, int first)
         }
     }
     puts(pathbuf->ptr);
+    struct stat st;
+    struct dirent *ent;
     while (ent = readdir(d)) {
         if (strcmp(ent->d_name, ".") == 0) continue;
         if (strcmp(ent->d_name, "..") == 0) continue;
@@ -113,9 +109,7 @@ traverse0(struct strbuf *pathbuf, int first)
 static struct strbuf*
 strbuf_new(void)
 {
-    struct strbuf *buf;
-    
-    buf = (struct strbuf*)malloc(sizeof(struct strbuf));
+    struct strbuf *buf = (struct strbuf*)malloc(sizeof(struct strbuf));
     if (!buf) {
         print_error("malloc(3)");
         exit(1);
@@ -132,10 +126,8 @@ strbuf_new(void)
 static void
 strbuf_realloc(struct strbuf *buf, size_t len)
 {
-    char *tmp;
-
     if (buf->len > len) return;
-    tmp = realloc(buf->ptr, len);
+    char *tmp = realloc(buf->ptr, len);
     if (!tmp) {
         print_error("realloc(3)");
         exit(1);

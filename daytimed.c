@@ -33,20 +33,17 @@ main(int argc, char *argv[])
 {
     struct sockaddr_storage addr;
     socklen_t addrlen = sizeof addr;
-    int sock, server;
-    time_t t;
-    struct tm *tm;
-    char *timestr;
     
-    server = listen_socket(argc > 1 ? atoi(argv[1]) : DEFAULT_PORT);
-    sock = accept(server, (struct sockaddr*)&addr, &addrlen);
+    int server = listen_socket(argc > 1 ? atoi(argv[1]) : DEFAULT_PORT);
+    int sock = accept(server, (struct sockaddr*)&addr, &addrlen);
     if (sock < 0) {
         perror("accept(2)");
         exit(1);
     }
+    time_t t;
     time(&t);
-    tm = localtime(&t);
-    timestr = asctime(tm);
+    struct tm *tm = localtime(&t);
+    char *timestr = asctime(tm);
     write(sock, timestr, strlen(timestr));
     close(sock);
     close(server);
@@ -56,24 +53,22 @@ main(int argc, char *argv[])
 static int
 listen_socket(int port)
 {
-    struct addrinfo hints, *res, *ai;
-    int err;
-    char service[16];
-
+    struct addrinfo hints;
     memset(&hints, 0, sizeof(struct addrinfo));
     /* hints.ai_family = AF_UNSPEC; */
     hints.ai_family = AF_INET;
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_flags = AI_PASSIVE;
+    char service[16];
     snprintf(service, sizeof service, "%d", port);
+    struct addrinfo *res;
+    int err;
     if ((err = getaddrinfo(NULL, service, &hints, &res)) != 0) {
         fprintf(stderr, "%s\n", gai_strerror(err));
         exit(1);
     }
-    for (ai = res; ai; ai = ai->ai_next) {
-        int sock;
-
-        sock = socket(ai->ai_family, ai->ai_socktype, ai->ai_protocol);
+    for (struct addrinfo *ai = res; ai; ai = ai->ai_next) {
+        int sock = socket(ai->ai_family, ai->ai_socktype, ai->ai_protocol);
         if (sock < 0) continue;
         if (bind(sock, ai->ai_addr, ai->ai_addrlen) < 0) {
             close(sock);

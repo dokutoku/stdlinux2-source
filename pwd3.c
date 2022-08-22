@@ -5,9 +5,7 @@
 int
 main(int argc, char *argv[])
 {
-    char *path;
-    
-    path = getcwd(NULL, 0);
+    char *path = getcwd(NULL, 0);
     if (!path) {
         perror(path);
         exit(1);

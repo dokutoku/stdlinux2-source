@@ -11,16 +11,13 @@ static int open_connection(char *host, char *service);
 int
 main(int argc, char *argv[])
 {
-    int sock;
-    FILE *f;
-    char buf[1024];
-
-    sock = open_connection((argc>1 ? argv[1] : "localhost"), "daytime");
-    f = fdopen(sock, "r");
+    int sock = open_connection((argc>1 ? argv[1] : "localhost"), "daytime");
+    FILE *f = fdopen(sock, "r");
     if (!f) {
         perror("fdopen(3)");
         exit(1);
     }
+    char buf[1024];
     fgets(buf, sizeof buf, f);
     fclose(f);
     fputs(buf, stdout);
@@ -30,19 +27,18 @@ main(int argc, char *argv[])
 static int
 open_connection(char *host, char *service)
 {
-    int sock;
-    struct addrinfo hints, *res, *ai;
-    int err;
-
+    struct addrinfo hints;
     memset(&hints, 0, sizeof(struct addrinfo));
     hints.ai_family = AF_UNSPEC;
     hints.ai_socktype = SOCK_STREAM;
+    struct addrinfo *res;
+    int err;
     if ((err = getaddrinfo(host, service, &hints, &res)) != 0) {
         fprintf(stderr, "getaddrinfo(3): %s\n", gai_strerror(err));
         exit(1);
     }
-    for (ai = res; ai; ai = ai->ai_next) {
-        sock = socket(ai->ai_family, ai->ai_socktype, ai->ai_protocol);
+    for (struct addrinfo *ai = res; ai; ai = ai->ai_next) {
+        int sock = socket(ai->ai_family, ai->ai_socktype, ai->ai_protocol);
         if (sock < 0) {
             continue;
         }

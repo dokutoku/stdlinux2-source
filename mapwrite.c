@@ -9,13 +9,11 @@
 int
 main(int argc, char *argv[])
 {
-    int fd;
-    char *ptr;
     int len = 3;
 
     /* prepare data file */
     unlink(DATAFILE);   /* ignore error */
-    fd = open(DATAFILE, O_WRONLY|O_CREAT, 0666);
+    int fd = open(DATAFILE, O_WRONLY|O_CREAT, 0666);
     if (fd < 0) {
         perror(DATAFILE);
         exit(1);
@@ -29,7 +27,7 @@ main(int argc, char *argv[])
         perror(DATAFILE);
         exit(1);
     }
-    ptr = (char*)mmap(0, len, PROT_WRITE, MAP_SHARED, fd, 0);
+    char *ptr = (char*)mmap(0, len, PROT_WRITE, MAP_SHARED, fd, 0);
     if (!ptr) {
         perror("mmap(2)");
         exit(1);

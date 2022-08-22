@@ -60,13 +60,12 @@ static void
 prompt(void)
 {
     static char buf[LINEBUF_MAX];
-    struct cmd *cmd;
 
     fprintf(stdout, "$ ");
     fflush(stdout);
     if (fgets(buf, LINEBUF_MAX, stdin) == NULL)
         exit(0);
-    cmd = parse_command_line(buf);
+    struct cmd *cmd = parse_command_line(buf);
     if (cmd == NULL) {
         fprintf(stderr, "%s: syntax error\n", program_name);
         return;
@@ -79,12 +78,11 @@ prompt(void)
 static int
 invoke_commands(struct cmd *cmdhead)
 {
-    int st;
     int original_stdin = dup(0);
     int original_stdout = dup(1);
 
     exec_pipeline(cmdhead);
-    st = wait_pipeline(cmdhead);
+    int st = wait_pipeline(cmdhead);
     close(0); dup2(original_stdin, 0); close(original_stdin);
     close(1); dup2(original_stdout, 1); close(original_stdout);
 
@@ -97,11 +95,10 @@ invoke_commands(struct cmd *cmdhead)
 static void
 exec_pipeline(struct cmd *cmdhead)
 {
-    struct cmd *cmd;
     int fds1[2] = {-1, -1};
     int fds2[2] = {-1, -1};
 
-    for (cmd = cmdhead; cmd && !REDIRECT_P(cmd); cmd = cmd->next) {
+    for (struct cmd *cmd = cmdhead; cmd && !REDIRECT_P(cmd); cmd = cmd->next) {
         fds1[0] = fds2[0];
         fds1[1] = fds2[1];
         if (! TAIL_P(cmd)) {
@@ -148,10 +145,8 @@ exec_pipeline(struct cmd *cmdhead)
 static void
 redirect_stdout(char *path)
 {
-    int fd;
-
     close(1);
-    fd = open(path, O_WRONLY|O_TRUNC|O_CREAT, 0666);
+    int fd = open(path, O_WRONLY|O_TRUNC|O_CREAT, 0666);
     if (fd < 0) {
         perror(path);
         return;
@@ -165,9 +160,7 @@ redirect_stdout(char *path)
 static int
 wait_pipeline(struct cmd *cmdhead)
 {
-    struct cmd *cmd;
-
-    for (cmd = cmdhead; cmd && !REDIRECT_P(cmd); cmd = cmd->next) {
+    for (struct cmd *cmd = cmdhead; cmd && !REDIRECT_P(cmd); cmd = cmd->next) {
         if (BUILTIN_P(cmd))
             cmd->status = lookup_builtin(cmd->argv[0])->f(cmd->argc, cmd->argv);
         else
@@ -192,9 +185,7 @@ pipeline_tail(struct cmd *cmdhead)
 static struct cmd*
 parse_command_line(char *p)
 {
-    struct cmd *cmd;
-
-    cmd = xmalloc(sizeof(struct cmd));
+    struct cmd *cmd = xmalloc(sizeof(struct cmd));
     cmd->argc = 0;
     cmd->argv = xmalloc(sizeof(char*) * INIT_ARGV);
     cmd->capa = INIT_ARGV;
@@ -258,9 +249,7 @@ struct builtin builtins_list[] = {
 static struct builtin*
 lookup_builtin(char *cmd)
 {
-    struct builtin *p;
-
-    for (p = builtins_list; p->name; p++) {
+    for (struct builtin *p = builtins_list; p->name; p++) {
         if (strcmp(cmd, p->name) == 0)
             return p;
     }
@@ -284,12 +273,11 @@ builtin_cd(int argc, char *argv[])
 static int
 builtin_pwd(int argc, char *argv[])
 {
-    char buf[PATH_MAX];
-
     if (argc != 1) {
         fprintf(stderr, "%s: wrong argument\n", argv[0]);
         return 1;
     }
+    char buf[PATH_MAX];
     if (!getcwd(buf, PATH_MAX)) {
         fprintf(stderr, "%s: cannot get working directory\n", argv[0]);
         return 1;
@@ -311,9 +299,7 @@ builtin_exit(int argc, char *argv[])
 static void*
 xmalloc(size_t sz)
 {
-    void *p;
-
-    p = calloc(1, sz);
+    void *p = calloc(1, sz);
     if (!p)
         exit(3);
     return p;
@@ -322,10 +308,8 @@ xmalloc(size_t sz)
 static void*
 xrealloc(void *ptr, size_t sz)
 {
-    void *p;
-
     if (!ptr) return xmalloc(sz);
-    p = realloc(ptr, sz);
+    void *p = realloc(ptr, sz);
     if (!p)
         exit(3);
     return p;

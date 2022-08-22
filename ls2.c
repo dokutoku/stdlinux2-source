@@ -14,13 +14,11 @@ static char* allocate_path_buffer(size_t required_len);
 int
 main(int argc, char *argv[])
 {
-    int i;
-
     if (argc < 2) {
         fprintf(stderr, "%s: no arguments\n", argv[0]);
         exit(1);
     }
-    for (i = 1; i < argc; i++) {
+    for (int i = 1; i < argc; i++) {
         do_ls(argv[i]);
     }
     exit(0);

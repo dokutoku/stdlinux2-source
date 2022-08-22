@@ -9,12 +9,8 @@ main(int argc, char *argv[])
     if (argc == 1) {
         do_wc_l(stdin);
     } else {
-        int i;
-
-        for (i = 1; i < argc; i++) {
-            FILE *f;
-
-            f = fopen(argv[i], "r");
+        for (int i = 1; i < argc; i++) {
+            FILE *f = fopen(argv[i], "r");
             if (!f) {
                 perror(argv[i]);
                 exit(1);
@@ -29,11 +25,9 @@ main(int argc, char *argv[])
 static void
 do_wc_l(FILE *f)
 {
-    unsigned long n;
+    unsigned long n = 0;
     int c;
     int prev = '\n';   /* '\n' is for empty file */
-
-    n = 0;
     while ((c = getc(f)) != EOF) {
         if (c == '\n') {
             n++;

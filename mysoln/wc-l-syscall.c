@@ -23,15 +23,12 @@ int main(int argc, char *argv[])
 #define BUFFER_SIZE 2048
 
 static void wc(const char *path) {
-    int fd;
-    int n;
-
-    fd = open(path, O_RDONLY);
+    int fd = open(path, O_RDONLY);
     if (fd < 0) die(path);
     unsigned long count = 0;
     for (;;) {
         unsigned char buf[BUFFER_SIZE];
-        n = read(fd, buf, sizeof buf);
+        int n = read(fd, buf, sizeof buf);
         if (n < 0) die(path);
         if (n == 0) break;
         for (unsigned long i = 0; i < n; i++) {

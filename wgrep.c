@@ -18,14 +18,12 @@ static void do_grep(wchar_t *pattern, FILE *f);
 int
 main(int argc, char *argv[])
 {
-    wchar_t pattern[1024];
-    int i;
-
     setlocale(LC_CTYPE, "");
     if (argc < 2) {
         fputs("no pattern\n", stderr);
         exit(1);
     }
+    wchar_t pattern[1024];
     if (mbstowcs(pattern, argv[1], 1024) == (size_t)(-1)) {
         fprintf(stderr, "mbstowcs failed #1\n");
         exit(1);
@@ -34,10 +32,8 @@ main(int argc, char *argv[])
         do_grep(pattern, stdin);
     }
     else {
-        for (i = 2; i < argc; i++) {
-            FILE *f;
-            
-            f = fopen(argv[i], "r");
+        for (int i = 2; i < argc; i++) {
+            FILE *f = fopen(argv[i], "r");
             if (!f) {
                 perror(argv[i]);
                 exit(1);

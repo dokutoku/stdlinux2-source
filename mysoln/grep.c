@@ -8,14 +8,12 @@ static void do_grep(regex_t *pat, FILE *f);
 
 int main(int argc, char const* argv[])
 {
-    regex_t pat;
-    int err;
-
     if (argc < 2) {
         fputs("no pattern\n", stderr);
         exit(1);
     }
-    err = regcomp(&pat, argv[1], REG_EXTENDED | REG_NOSUB | REG_NEWLINE);
+    regex_t pat;
+    int err = regcomp(&pat, argv[1], REG_EXTENDED | REG_NOSUB | REG_NEWLINE);
     if (err != 0) {
         char buf[1024];
 
@@ -27,9 +25,7 @@ int main(int argc, char const* argv[])
         do_grep(&pat, stdin);
     } else {
         for (int i = 2; i < argc; i++) {
-            FILE *f;
-
-            f = fopen(argv[i], "r");
+            FILE *f = fopen(argv[i], "r");
             if (!f) {
                 perror(argv[i]);
                 exit(1);

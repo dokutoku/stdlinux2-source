@@ -9,12 +9,11 @@ static char *filetype(mode_t mode);
 int
 main(int argc, char *argv[])
 {
-    struct stat st;
-
     if (argc != 2) {
         fprintf(stderr, "wrong argument\n");
         exit(1);
     }
+    struct stat st;
     if (lstat(argv[1], &st) < 0) {
         perror(argv[1]);
         exit(1);

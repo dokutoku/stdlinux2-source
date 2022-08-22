@@ -11,9 +11,7 @@
 int
 main(int argc, char *argv[])
 {
-    int i;
-
-    for (i = 0; i < argc; i++) {
+    for (int i = 0; i < argc; i++) {
         if (utime(argv[i], NULL) < 0) {
             perror(argv[i]);
             /* We do not exit here...

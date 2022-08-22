@@ -22,11 +22,6 @@ main(int argc, char *argv[])
 static void
 tail(FILE *f, int nlines)
 {
-    unsigned char **ringbuf;
-    unsigned char **p;
-    unsigned char *line;
-    int n;
-
 #define INC(ptrvar) do { \
     ptrvar++;                       \
     if (ptrvar >= ringbuf + nlines) \
@@ -35,9 +30,10 @@ tail(FILE *f, int nlines)
 
     if (nlines == 0) return;
 
-    ringbuf = calloc(nlines, sizeof(char*));
+    unsigned char **ringbuf = calloc(nlines, sizeof(char*));
     if (ringbuf == NULL) exit(1);
-    p = ringbuf;
+    unsigned char **p = ringbuf;
+    unsigned char *line;
     while (line = readline(f)) {
         if (*p)
             free(*p);
@@ -45,7 +41,7 @@ tail(FILE *f, int nlines)
         INC(p);
     }
     if (*p == NULL) p = ringbuf;
-    for (n = nlines; n > 0 && *p; n--) {
+    for (int n = nlines; n > 0 && *p; n--) {
         printf("%s", *p);
         free(*p);
         INC(p);
@@ -56,14 +52,13 @@ tail(FILE *f, int nlines)
 static unsigned char *
 readline(FILE *f)
 {
-    unsigned char *buf, *p;
     size_t buflen = BUFSIZ;
-    int c;
 
-    buf = p = malloc(sizeof(char) * buflen);
+    unsigned char *p = malloc(sizeof(char) * buflen);
+    unsigned char *buf = p;
     if (buf == NULL) exit(1);
     for (;;) {
-        c = getc(f);
+        int c = getc(f);
         if (c == EOF) {
             if (buf == p) {
                 free(buf);

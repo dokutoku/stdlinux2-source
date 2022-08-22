@@ -11,13 +11,11 @@ static void die(const char *s);
 int
 main(int argc, char *argv[])
 {
-    int i;
-
     if (argc < 2) {
         fprintf(stderr, "%s: no arguments\n", argv[0]);
         exit(1);
     }
-    for (i = 1; i < argc; i++) {
+    for (int i = 1; i < argc; i++) {
         make_path(argv[i]);
     }
     exit(0);

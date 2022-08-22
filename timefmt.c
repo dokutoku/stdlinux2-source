@@ -8,14 +8,12 @@
 int
 main(int argc, char *argv[])
 {
-    time_t t;
-    struct tm *tm;
-    struct timeval tv;
-
     setlocale(LC_TIME, "");
 
     /* time(2), ctime(3), gettimeofday(2) */
+    time_t t;
     time(&t);
+    struct timeval tv;
     gettimeofday(&tv, NULL);
     printf("time         = %ld\n", (long)t);
     printf("ctime        = %s", ctime(&t));
@@ -24,7 +22,7 @@ main(int argc, char *argv[])
     printf("ctime(tv)    = %s", ctime(&tv.tv_sec));
 
     /* gmtime(3), localtime(3) */
-    tm = gmtime(&t);
+    struct tm *tm = gmtime(&t);
     printf("asctime(UTC) = %s", asctime(tm));
     printf("mktime(UTC)  = %ld\n", (long)t);
     tm = localtime(&t);
