@@ -15,7 +15,7 @@ main(int argc, char *argv[])
     time_t t;
     time(&t);
     struct tm *tm = localtime(&t);
-    for (char *p = fmtchars; *p; p++) {
+    for (char *p = fmtchars; *p != '\0'; p++) {
         char fmt[16];
         char buf[256];
 

@@ -46,7 +46,7 @@ main(int argc, char *argv[])
     /* re は「正規表現 (Regular Expression)」の略語。
        「regexp」「regex」などもよく使われます */
     int re_mode = REG_EXTENDED | REG_NOSUB | REG_NEWLINE;
-    if (opt_ignorecase) re_mode |= REG_ICASE;
+    if (opt_ignorecase != 0) re_mode |= REG_ICASE;
     regex_t re;
     int err = regcomp(&re, pattern, re_mode);
     if (err != 0) {
@@ -91,10 +91,10 @@ grep_stream(regex_t *re, FILE *f)
 
     while (fgets(buf, sizeof buf, f) != NULL) {
         int matched = (regexec(re, buf, 0, NULL, 0) == 0);
-        if (opt_invert) {
+        if (opt_invert != 0) {
             matched = !matched;
         }
-        if (matched) {
+        if (matched != 0) {
             fputs(buf, stdout);
         }
     }

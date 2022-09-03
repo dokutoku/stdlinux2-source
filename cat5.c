@@ -27,7 +27,7 @@ do_cat(const char *path)
     if (f == NULL) die(path);
     for (;;) {
         size_t n_read = fread(buf, 1, sizeof buf, f);
-        if (ferror(f)) die(path);
+        if (ferror(f) != 0) die(path);
         size_t n_written = fwrite(buf, 1, n_read, stdout);
         if (n_written < n_read) die(path);
         if (n_read < sizeof buf) break;

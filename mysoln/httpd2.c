@@ -133,13 +133,13 @@ int main(int argc, char *argv[])
     }
     char *docroot = argv[optind];
 
-    if (do_chroot) {
+    if (do_chroot != 0) {
         setup_environment(docroot, user, group);
         docroot = "";
     }
     install_signal_handlers();
     int server_fd = listen_socket(port);
-    if (!debug_mode) {
+    if (debug_mode == 0) {
         openlog(SERVER_NAME, LOG_PID|LOG_NDELAY, LOG_DAEMON);
         become_daemon();
     }
@@ -350,7 +350,7 @@ static struct HTTPHeaderField* read_header_field(FILE *in) {
 }
 
 static void upcase(char *str) {
-    for (char *p = str; *p; p++) {
+    for (char *p = str; *p != '\0'; p++) {
         *p = (char)toupper((int)*p);
     }
 }
@@ -399,7 +399,7 @@ static void respond_to(struct HTTPRequest *req, FILE *out, char *docroot) {
 
 static void do_file_response(struct HTTPRequest *req, FILE *out, char *docroot) {
     struct FileInfo *info = get_fileinfo(docroot, req->path);
-    if (!info->ok) {
+    if (info->ok == 0) {
         free_fileinfo(info);
         not_found(req, out);
         return;
@@ -523,7 +523,7 @@ static void log_exit(const char *fmt, ...) {
     va_list ap;
 
     va_start(ap, fmt);
-    if (debug_mode) {
+    if (debug_mode != 0) {
         vfprintf(stderr, fmt, ap);
         fputc('\n', stderr);
     } else {

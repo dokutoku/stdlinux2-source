@@ -86,13 +86,13 @@ parse_cmd(char *cmdline)
     cmd->argc = 0;
     cmd->argv = xmalloc(sizeof(char*) * INIT_CAPA);
     cmd->capa = INIT_CAPA;
-    while (*p) { // 末端 (\0) になるまで回す
-        while (*p && isspace((int)*p)) {
+    while (*p != '\0') { // 末端 (\0) になるまで回す
+        while ((*p != '\0') && (isspace((int)*p) != 0)) {
             // 何で必要かわからないけど、ないと echo hoge で死んだ
             // 追記: 末端文字に '\0' を割り当てている
             *p++ = '\0';
         }
-        if (*p) {
+        if (*p != '\0') {
             if (cmd->capa <= cmd->argc + 1) {   /* +1 for final NULL */
                 cmd->capa *= 2;
                 cmd->argv = xrealloc(cmd->argv, cmd->capa); // 用意したメモリサイズよりも引数の数が多かったら拡張する
@@ -100,7 +100,7 @@ parse_cmd(char *cmdline)
             cmd->argv[cmd->argc] = p;
             cmd->argc++;
         }
-        while (*p && !isspace((int)*p)) { // 次の単語までポインタを進める
+        while ((*p != '\0') && (isspace((int)*p) == 0)) { // 次の単語までポインタを進める
             p++;
         }
     }

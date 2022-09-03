@@ -180,7 +180,7 @@ static struct HTTPHeaderField *read_header_field(FILE *in) {
 }
 
 static void upcase(char *str) {
-    for (char *p = str; *p; p++)
+    for (char *p = str; *p != '\0'; p++)
         *p = (char)toupper((int)*p);
 }
 
@@ -229,7 +229,7 @@ static void respond_to(struct HTTPRequest *req, FILE *out, char *docroot) {
 
 static void do_file_response(struct HTTPRequest *req, FILE *out, char *docroot) {
     struct FileInfo *info = get_fileinfo(docroot, req->path);
-    if (!info->ok) {
+    if (info->ok == 0) {
         free_fileinfo(info);
         not_found(req, out);
         return;

@@ -50,7 +50,7 @@ traverse0(struct strbuf *pathbuf, int first)
         case ENOTDIR:   /* might be replaced after last readdir(). */
             return;
         case ENOENT:
-            if (first) {
+            if (first != 0) {
                 print_error(pathbuf->ptr);
                 exit(1);
             }

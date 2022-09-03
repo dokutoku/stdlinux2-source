@@ -180,7 +180,7 @@ pipeline_tail(struct cmd *cmdhead)
 }
 
 #define INIT_ARGV 8
-#define IDENT_CHAR_P(c) (!isspace((int)c) && ((c) != '|') && ((c) != '>'))
+#define IDENT_CHAR_P(c) ((isspace((int)c) == 0) && ((c) != '|') && ((c) != '>'))
 
 static struct cmd*
 parse_command_line(char *p)
@@ -190,12 +190,12 @@ parse_command_line(char *p)
     cmd->argv = xmalloc(sizeof(char*) * INIT_ARGV);
     cmd->capa = INIT_ARGV;
     cmd->next = NULL;
-    while (*p) {
-        while (*p && isspace((int)*p))
+    while (*p != '\0') {
+        while ((*p != '\0') && (isspace((int)*p) != 0))
             *p++ = '\0';
         if (! IDENT_CHAR_P(*p))
             break;
-        if (*p && IDENT_CHAR_P(*p)) {
+        if ((*p != '\0') && (IDENT_CHAR_P(*p))) {
             if (cmd->capa <= cmd->argc) {
                 cmd->capa *= 2;
                 cmd->argv = xrealloc(cmd->argv, cmd->capa);
@@ -203,7 +203,7 @@ parse_command_line(char *p)
             cmd->argv[cmd->argc] = p;
             cmd->argc++;
         }
-        while (*p && IDENT_CHAR_P(*p))
+        while ((*p != '\0') && (IDENT_CHAR_P(*p)))
             p++;
     }
     if (cmd->capa <= cmd->argc) {

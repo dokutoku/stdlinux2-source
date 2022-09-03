@@ -38,7 +38,7 @@ static void tail(FILE *f) {
         curr = 0;
     }
 
-    for (int n = N_LINES; n > 0 && n_read_lines; n--, n_read_lines--) {
+    for (int n = N_LINES; (n > 0) && (n_read_lines != 0); n--, n_read_lines--) {
         printf("%s", ring_buffer[curr]);
         RING_BUFFER_INC(curr);
     }

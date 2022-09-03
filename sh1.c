@@ -85,11 +85,11 @@ parse_cmd(char *cmdline)
     cmd->argc = 0;
     cmd->argv = xmalloc(sizeof(char*) * INIT_CAPA);
     cmd->capa = INIT_CAPA;
-    while (*p) {
-        while (*p && isspace((int)*p)) {
+    while (*p != '\0') {
+        while ((*p != '\0') && (isspace((int)*p) != 0)) {
             *p++ = '\0';
         }
-        if (*p) {
+        if (*p != '\0') {
             if (cmd->capa <= cmd->argc + 1) {   /* +1 for final NULL */
                 cmd->capa *= 2;
                 cmd->argv = xrealloc(cmd->argv, sizeof(char*) * cmd->capa);
@@ -97,7 +97,7 @@ parse_cmd(char *cmdline)
             cmd->argv[cmd->argc] = p;
             cmd->argc++;
         }
-        while (*p && !isspace((int)*p)) {
+        while ((*p != '\0') && (isspace((int)*p) == 0)) {
             p++;
         }
     }

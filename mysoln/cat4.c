@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 static void do_cat(FILE *f, int escape) {
     int c;
 
-    if (escape) {
+    if (escape != 0) {
         while ((c = fgetc(f)) != EOF) {
             switch (c) {
                 case '\t':
