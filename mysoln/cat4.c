@@ -17,6 +17,8 @@ int main(int argc, char *argv[])
             case '?':
                     fprintf(stderr, "Usage: %s [-e] [file...]\n", argv[0]);
                     exit(1);
+            default:
+                break;
         }
     }
     argc -= optind;

@@ -33,6 +33,8 @@ main(int argc, char *argv[])
         case '?':         /* (6) */
             fprintf(stderr, "Usage: %s [-n LINES] [FILE ...]\n", argv[0]);
             exit(1);
+        default:
+            break;
         }
     }
     /* (7) */

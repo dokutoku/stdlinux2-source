@@ -144,6 +144,8 @@ main(int argc, char *argv[])
         case '?':
             fprintf(stderr, USAGE, argv[0]);
             exit(1);
+        default:
+            break;
         }
     }
     if (optind != argc - 1) {

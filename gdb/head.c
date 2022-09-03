@@ -32,6 +32,8 @@ main(int argc, char *argv[])
         case '?':
             fprintf(stderr, "%s: unknown option: -%c\n", argv[0], optopt);
             exit(1);
+        default:
+            break;
         }
     }
     if (optind == argc) {
