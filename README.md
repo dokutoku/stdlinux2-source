@@ -33,117 +33,117 @@ make test でテストを実行します。
 
 ## 第1章
 <dl>
-<dt>hello.c</dt>
+<dt><a href="hello.c">hello.c</a></dt>
 <dd>ありがちなHello, World!</dd>
 
-<dt>args.c</dt>
+<dt><a href="args.c">args.c</a></dt>
 <dd>コマンドライン引数を表示するプログラム</dd>
 
-<dt>segv.c</dt>
+<dt><a href="segv.c">segv.c</a></dt>
 <dd>NULLポインタを参照するだけのプログラム。
 確実にsegmentation faultを起こす。</dd>
 
-<dt>echo.c</dt>
+<dt><a href="echo.c">echo.c</a></dt>
 <dd>簡単なechoコマンド。</dd>
 </dl>
 
 ## 第4章
 <dl>
-<dt>bell.c</dt>
+<dt><a href="bell.c">bell.c</a></dt>
 <dd>端末のベルを鳴らすプログラム</dd>
 </dl>
 
 ## 第5章
 <dl>
-<dt>cat.c</dt> [my cat.c](./mysoln/cat.c)
+<dt><a href="cat.c">cat.c</a></dt> [my cat.c](./mysoln/cat.c)
 <dd>簡単なcatコマンド (システムコール版)</dd>
 
-<dt>cat0.c</dt>
+<dt><a href="cat0.c">cat0.c</a></dt>
 <dd>cat.cからエラー処理を取り除いたコード</dd>
 
-<dt>cat3.c</dt> [my soln cat3.c](./mysoln/cat3.c)
+<dt><a href="cat3.c">cat3.c</a></dt> [my soln cat3.c](./mysoln/cat3.c)
 <dd>問題5-1の解答例。
 コマンドライン引数がないときはstdinを読むcatコマンド</dd>
 
-<dt>wc-l-syscall.c</dt> [my soln wc-l-syscall.c](./mysoln/wc-l-syscall.c)
+<dt><a href="wc-l-syscall.c">wc-l-syscall.c</a></dt> [my soln wc-l-syscall.c](./mysoln/wc-l-syscall.c)
 <dd>問題5-2の解答例。
 標準入力からテキストを読み込み、その行数を表示する。</dd>
 </dl>
 
 ## 第6章
 <dl>
-<dt>cat2.c</dt>
+<dt><a href="cat2.c">cat2.c</a></dt>
 <dd>stdioを使ったcatコマンド</dd>
 
-<dt>getcperf.c</dt>
+<dt><a href="getcperf.c">getcperf.c</a></dt>
 <dd>fgetcとgetcの速度を比較するためのプログラム。
 何もコマンドライン引数を付けないとgetcを使い、
 コマンドライン引数で「f」を渡すとfgetcを使う。</dd>
 
-<dt>feof-bug.c</dt>
+<dt><a href="feof-bug.c">feof-bug.c</a></dt>
 <dd>feofを使ったときに起こる有名なバグを確認するコード。
 このプログラムの標準入力にテキストファイルをリダイレクトして実行すると、
 最後の行が 2 回表示される。</dd>
 
-<dt>cat-escape.c</dt>
+<dt><a href="cat-escape.c">cat-escape.c</a></dt>
 <dd>問題6-1の解答例。
 タブを「\t」、改行を「$」+ 改行で表示するcatコマンド</dd>
 
-<dt>wc-l-stdio.c</dt>
+<dt><a href="wc-l-stdio.c">wc-l-stdio.c</a></dt>
 <dd>問題6-2の解答例。
 標準入力からテキストを読み込み、その行数を表示する。</dd>
 
-<dt>cat5.c</dt>
+<dt><a href="cat5.c">cat5.c</a></dt>
 <dd>問題6-3の解答例。
 freadとfwriteを使ったcatコマンド。</dd>
 </dl>
 
 ## 第7章
 <dl>
-<dt>head.c</dt>
+<dt><a href="head.c">head.c</a></dt>
 <dd>簡単なheadコマンド。stdinのみ読む。</dd>
 
-<dt>head2.c</dt>
+<dt><a href="head2.c">head2.c</a></dt>
 <dd>簡単なheadコマンド。コマンドライン引数のファイルも読む。</dd>
 
-<dt>head3.c</dt>
+<dt><a href="head3.c">head3.c</a></dt>
 <dd>簡単なheadコマンド。
 getoptでコマンドラインオプションを解析する例。</dd>
 
-<dt>head4.c</dt>
+<dt><a href="head4.c">head4.c</a></dt>
 <dd>簡単なheadコマンド。
 getopt_longでコマンドラインオプションを解析する例。</dd>
 
-<dt>gdb/*</dt>
+<dt><a href="gdb/">gdb/*</a></dt>
 <dd>gdbのテストに使ったファイル。</dd>
 
-<dt>cat4.c</dt>
+<dt><a href="cat4.c">cat4.c</a></dt>
 <dd>問題7-1の解答例。
 -eオプションでcat-escape.cと同じ効果を発揮する
 catコマンド。</dd>
 
-<dt>tail.c</dt>
+<dt><a href="tail.c">tail.c</a></dt>
 <dd>問題7-2の解答例。
 簡単なtailコマンド（出力行数固定）。</dd>
 </dl>
 
 ## 第8章
 <dl>
-<dt>grep.c</dt>
+<dt><a href="grep.c">grep.c</a></dt>
 <dd>8章で作成したgrepコマンド</dd>
 
-<dt>array.c</dt>
+<dt><a href="array.c">array.c</a></dt>
 <dd>文字列と文字の配列が等しいことを確認するコード</dd>
 
-<dt>wgrep.c</dt>
+<dt><a href="wgrep.c">wgrep.c</a></dt>
 <dd>wchar を使ってマルチバイト文字にも対応した grep コマンド。
 固定文字列しか検索できない。</dd>
 
-<dt>grep2.c</dt>
+<dt><a href="grep2.c">grep2.c</a></dt>
 <dd>問題 8-1の解答例。
 -iオプションと-vオプションのついたgrepコマンド。</dd>
 
-<dt>slice.c</dt>
+<dt><a href="slice.c">slice.c</a></dt>
 <dd>問題8-2の解答例。
 マッチした部分を出力する。
 </dd>
@@ -151,54 +151,54 @@ catコマンド。</dd>
 
 ## 第10章
 <dl>
-<dt>ls.c</dt>
+<dt><a href="ls.c">ls.c</a></dt>
 <dd>簡単なlsコマンド。</dd>
 
-<dt>catdir.c</dt>
+<dt><a href="catdir.c">catdir.c</a></dt>
 <dd>opendirを使わずディレクトリを読むコマンド。
 ./catdir . | strings とするとなんとなくlsっぽい表示ができる。</dd>
 
-<dt>mkdir.c</dt>
+<dt><a href="mkdir.c">mkdir.c</a></dt>
 <dd>簡単なmkdirコマンド。mkdir(2)の使用例。</dd>
 
-<dt>rmdir.c</dt>
+<dt><a href="rmdir.c">rmdir.c</a></dt>
 <dd>簡単なrmdirコマンド。rmdir(2)の使用例。</dd>
 
-<dt>ln.c</dt>
+<dt><a href="ln.c">ln.c</a></dt>
 <dd>簡単なlnコマンド。link(2)の使用例。</dd>
 
-<dt>symlink.c</dt>
+<dt><a href="symlink.c">symlink.c</a></dt>
 <dd>簡単なln -sコマンド。symlink(2)の使用例。</dd>
 
-<dt>rm.c</dt>
+<dt><a href="rm.c">rm.c</a></dt>
 <dd>簡単なrmコマンド。unlink(2)の使用例。</dd>
 
-<dt>mv.c</dt>
+<dt><a href="mv.c">mv.c</a></dt>
 <dd>簡単なmvコマンド。rename(2)の使用例。</dd>
 
-<dt>stat.c</dt>
+<dt><a href="stat.c">stat.c</a></dt>
 <dd>コマンドライン引数で指定されたファイルの付帯情報を表示する。
 lstat(2)の使用例。</dd>
 
-<dt>touch.c</dt>
+<dt><a href="touch.c">touch.c</a></dt>
 <dd>簡単なtouchコマンド。utime(2)の使用例。
 このコマンドは時刻を更新するだけで、ファイルを作る機能はない。</dd>
 
-<dt>chmod.c</dt>
+<dt><a href="chmod.c">chmod.c</a></dt>
 <dd>簡単なchmodコマンド。chmod(2)の使用例。</dd>
 
-<dt>chown.c</dt>
+<dt><a href="chown.c">chown.c</a></dt>
 <dd>簡単なchownコマンド。chown(2)とgetpwnam(3) の使用例。</dd>
 
-<dt>chgrp.c</dt>
+<dt><a href="chgrp.c">chgrp.c</a></dt>
 <dd>簡単なchgrpコマンド。chgrp(2)の使用例。</dd>
 
-<dt>traverse.c</dt>
+<dt><a href="traverse.c">traverse.c</a></dt>
 <dd>問題10-1の解答例。
 コマンドライン引数で指定したディレクトリをトラバースして中にあるファイルを表示するプログラム。
 </dd>
 
-<dt>mkpath.c</dt>
+<dt><a href="mkpath.c">mkpath.c</a></dt>
 <dd>問題10-3の解答例。
 複数階層のディレクトリツリーを再帰的に作成する。
 </dd>
@@ -206,57 +206,57 @@ lstat(2)の使用例。</dd>
 
 ## 第11章
 <dl>
-<dt>mapwrite.c</dt>
+<dt><a href="mapwrite.c">mapwrite.c</a></dt>
 <dd>mmap(2) のテストプログラム。</dd>
 
-<dt>shlib/*</dt>
+<dt><a href="shlib/">shlib/*</a></dt>
 <dd>共有ライブラリを作成する例 [Linux only]</dd>
 
-<dt>link/*</dt>
+<dt><a href="link/">link/*</a></dt>
 <dd>ライブラリのダイナミックリンクとダイナミックロードの例 [Linux only]</dd>
 
-<dt>tail2.c</dt>
+<dt><a href="tail2.c">tail2.c</a></dt>
 <dd>問題11-1の解答例。
 簡単なtailコマンド（出力行数がコマンドライン引数で指定可能）。</dd>
 </dl>
 
 ## 第12章
 <dl>
-<dt>exec.c</dt>
+<dt><a href="exec.c">exec.c</a></dt>
 <dd>exec族のテストコード。</dd>
 
-<dt>spawn.c</dt>
+<dt><a href="spawn.c">spawn.c</a></dt>
 <dd>コマンドライン引数で渡されたコマンドを実行する。</dd>
 
-<dt>dupread.c</dt>
+<dt><a href="dupread.c">dupread.c</a></dt>
 <dd>dup(2)のテストプログラム。</dd>
 
-<dt>sh1.c</dt>
+<dt><a href="sh1.c">sh1.c</a></dt>
 <dd>問題12-2の解答例。
 ごく簡単なシェル。</dd>
 
-<dt>sh2.c</dt>
+<dt><a href="sh2.c">sh2.c</a></dt>
 <dd>問題12-3の解答例。
 パイプとリダイレクトを実装したシェル。</dd>
 </dl>
 
 ## 第13章
 <dl>
-<dt>sig.c</dt>
+<dt><a href="sig.c">sig.c</a></dt>
 <dd>signal(2) のテストプログラム。SIGINT を待つだけ。</dd>
 
-<dt>sigqueue-test.c</dt>
+<dt><a href="sigqueue-test.c">sigqueue-test.c</a></dt>
 <dd>シグナルがキューイングされるかテストするプログラム。
 Linux では、プログラムが起動したあとに素早く 5 回
 Ctrl-C を打っても (5 回シグナルを送っても) メッセー
 ジは 2 回しか表示されない。つまり残り 3 つは失われ
 たということ。</dd>
 
-<dt>isatty.c</dt>
+<dt><a href="isatty.c">isatty.c</a></dt>
 <dd>stdin, stdout, stderr のそれぞれについて、
 端末かどうか判定する。</dd>
 
-<dt>trap.c</dt>
+<dt><a href="trap.c">trap.c</a></dt>
 <dd>問題 13-1 の解答例。
 SIGINT (Ctrl-C による割り込み) を受けたらメッセージを
 出して終了する。</dd>
@@ -264,54 +264,54 @@ SIGINT (Ctrl-C による割り込み) を受けたらメッセージを
 
 ## 第14章
 <dl>
-<dt>pwd.c</dt>
+<dt><a href="pwd.c">pwd.c</a></dt>
 <dd>簡単なpwdコマンド。定数を使う。</dd>
 
-<dt>pwd2.c</dt>
+<dt><a href="pwd2.c">pwd2.c</a></dt>
 <dd>簡単なpwdコマンド。自分でバッファの長さを調節する。</dd>
 
-<dt>pwd3.c</dt>
+<dt><a href="pwd3.c">pwd3.c</a></dt>
 <dd>簡単なpwdコマンド。GNU libc特有のgetcwd()の機能を使う。 [Linux Only]</dd>
 
-<dt>showenv.c</dt>
+<dt><a href="showenv.c">showenv.c</a></dt>
 <dd>getenv(3) のテストプログラム。
 コマンドライン引数で指定された環境変数の値を表示する。
 env.c も参照。</dd>
 
-<dt>env.c</dt>
+<dt><a href="env.c">env.c</a></dt>
 <dd>簡単なenvコマンド。すべての環境変数を表示する。</dd>
 
-<dt>user.c</dt>
+<dt><a href="user.c">user.c</a></dt>
 <dd>コマンドライン引数で指定したユーザのユーザ ID を表示する。
 getpwnam(3) の使用例。</dd>
 
-<dt>id.c</dt>
+<dt><a href="id.c">id.c</a></dt>
 <dd>簡単なidコマンド。user.c も参照。</dd>
 
-<dt>timefmt.c</dt>
+<dt><a href="timefmt.c">timefmt.c</a></dt>
 <dd>時刻 API のテストプログラム。</dd>
 
-<dt>strftime.c</dt>
+<dt><a href="strftime.c">strftime.c</a></dt>
 <dd>strftime(3) のテストプログラム。</dd>
 
-<dt>ls2.c</dt>
+<dt><a href="ls2.c">ls2.c</a></dt>
 <dd>問題14-3の解答例。
 簡単なlsコマンド。ファイルのオーナーと最終更新時刻も表示する。</dd>
 </dl>
 
 ## 第15章
 <dl>
-<dt>daytime.c</dt>
+<dt><a href="daytime.c">daytime.c</a></dt>
 <dd>daytimeクライアント。</dd>
 
-<dt>daytimed.c</dt>
+<dt><a href="daytimed.c">daytimed.c</a></dt>
 <dd>daytimeサーバ。
 書籍で書いたのと同じ理由によりIPv4専用。</dd>
 </dl>
 
 ## 第16章
 <dl>
-<dt>httpd.c</dt>
+<dt><a href="httpd.c">httpd.c</a></dt>
 <dd>本章で作成したお手軽HTTPサーバ。
 stdinしか読めない。
 </dd>
@@ -319,7 +319,7 @@ stdinしか読めない。
 
 ## 第17章
 <dl>
-<dt>httpd2.c</dt>
+<dt><a href="httpd2.c">httpd2.c</a></dt>
 <dd>本章で作成したお手軽HTTPサーバ。
 自分でデーモン化とソケット接続が可能。</dd>
 
@@ -344,12 +344,12 @@ int main(int argc, char const* argv[])
 }
 ```
 
-<dt>logging.c</dt>
+<dt><a href="logging.c">logging.c</a></dt>
 <dd>syslog(3)のテストプログラム。</dd>
 </dl>
 
 ## 第18章
 <dl>
-<dt>make/*</dt>
+<dt><a href="make/">make/*</a></dt>
 <dd>makeとMakefileの例</dd>
 </dl>
