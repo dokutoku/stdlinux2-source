@@ -3,7 +3,7 @@
 このディレクトリには『ふつうのLinuxプログラミング第2版』の
 サンプルコード (+ α) が収録されています。
 
-サポートサイト: http://i.loveruby.net/stdlinux2/
+サポートサイト: https://i.loveruby.net/stdlinux2/
 
 ## 必要環境
 
