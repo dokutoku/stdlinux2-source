@@ -9,10 +9,9 @@ static void do_head(FILE *f, long nlines);
 int
 main(int argc, char *argv[])
 {
-    int opt;
     long nlines = DEFAULT_N_LINES;
 
-    while ((opt = getopt(argc, argv, "n:")) != -1) {
+    for (int opt = getopt(argc, argv, "n:"); opt != -1; opt = getopt(argc, argv, "n:")) {
         switch (opt) {
         case 'n':
             nlines = atol(optarg);
@@ -44,8 +43,7 @@ static void
 do_head(FILE *f, long nlines)
 {
     if (nlines <= 0) return;
-    int c;
-    while ((c = getc(f)) != EOF) {
+    for (int c = getc(f); c != EOF; c = getc(f)) {
         if (putchar(c) < 0) exit(1);
         if (c == '\n') {
             nlines--;

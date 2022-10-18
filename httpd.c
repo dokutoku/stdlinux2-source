@@ -133,8 +133,7 @@ read_request(FILE *in)
     struct HTTPRequest *req = xmalloc(sizeof(struct HTTPRequest));
     read_request_line(req, in);
     req->header = NULL;
-    struct HTTPHeaderField *h;
-    while ((h = read_header_field(in)) != NULL) {
+    for (struct HTTPHeaderField *h = read_header_field(in); h != NULL; h = read_header_field(in)) {
         h->next = req->header;
         req->header = h;
     }

@@ -32,8 +32,7 @@ do_ls(char *path)
         perror(path);
         exit(1);
     }
-    struct dirent *ent;
-    while ((ent = readdir(d)) != NULL) {
+    for (struct dirent *ent = readdir(d); ent != NULL; ent = readdir(d)) {
         char *buf = allocate_path_buffer(strlen(path) + 1 + strlen(ent->d_name));
         // sprintf does NOT cause buffer overflow here, because we calculate required buffer length beforehand.
         sprintf(buf, "%s/%s", path, ent->d_name);

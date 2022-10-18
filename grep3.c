@@ -52,9 +52,7 @@ main(int argc, char *argv[])
 static void
 do_grep(regex_t *pat, FILE *src)
 {
-    char *line;
-
-    while ((line = get_line(src)) != NULL) {
+    for (char *line = get_line(src); line != NULL; line = get_line(src)) {
         if (regexec(pat, line, 0, NULL, 0) == 0) {
             puts(line);
         }
@@ -76,7 +74,7 @@ get_line(FILE *src)
     size_t idx = 0;
 
     int c;
-    while ((c = getc(src)) != EOF) {
+    for (c = getc(src); c != EOF; c = getc(src)) {
         if (c == '\n')
             break;
         if (idx == capa - 1) {   /* バッファ長チェック */

@@ -31,8 +31,7 @@ static void
 do_head(FILE *f, long nlines)
 {
     if (nlines <= 0) return;
-    int c;
-    while ((c = getc(f)) != EOF) {
+    for (int c = getc(f); c != EOF; c = getc(f)) {
         if (putchar(c) < 0) exit(1);
         if (c == '\n') {
             nlines--;

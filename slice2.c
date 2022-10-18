@@ -52,8 +52,7 @@ main(int argc, char *argv[])
 static void
 do_slice(regex_t *pat, FILE *src)
 {
-    char *line;
-    while ((line = get_line(src)) != NULL) {
+    for (char *line = get_line(src); line != NULL; line = get_line(src)) {
         regmatch_t matched[1];
         if (regexec(pat, line, 1, matched, 0) == 0) {
             char *str = line + matched[0].rm_so;
@@ -79,7 +78,7 @@ get_line(FILE *src)
     size_t idx = 0;
 
     int c;
-    while ((c = getc(src)) != EOF) {
+    for (c = getc(src); c != EOF; c = getc(src)) {
         if (c == '\n')
             break;
         if (idx == capa - 1) {   /* バッファ長チェック */

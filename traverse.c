@@ -69,8 +69,7 @@ traverse0(struct strbuf *pathbuf, int first)
     }
     puts(pathbuf->ptr);
     struct stat st;
-    struct dirent *ent;
-    while ((ent = readdir(d)) != NULL) {
+    for (struct dirent *ent = readdir(d); ent != NULL; ent = readdir(d)) {
         if (strcmp(ent->d_name, ".") == 0) continue;
         if (strcmp(ent->d_name, "..") == 0) continue;
         strbuf_realloc(pathbuf, pathbuf->len + 1 + strlen(ent->d_name) + 1);

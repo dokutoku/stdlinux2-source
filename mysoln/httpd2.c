@@ -101,9 +101,8 @@ int main(int argc, char *argv[])
     int do_chroot = 0;
     char *user = NULL;
     char *group = NULL;
-    int opt;
 
-    while ((opt = getopt_long(argc, argv, "", longopts, NULL)) != -1) {
+    for (int opt = getopt_long(argc, argv, "", longopts, NULL); opt != -1; opt = getopt_long(argc, argv, "", longopts, NULL)) {
         switch (opt) {
             case 0:
                 break;
@@ -284,8 +283,7 @@ static struct HTTPRequest* read_request(FILE *in) {
     struct HTTPRequest *req = xmalloc(sizeof(struct HTTPHeaderField));
     read_request_line(req, in);
     req->header = NULL;
-    struct HTTPHeaderField *h;
-    while ((h = read_header_field(in)) != NULL) {
+    for (struct HTTPHeaderField *h = read_header_field(in); h != NULL; h = read_header_field(in)) {
         h->next = req->header;
         req->header = h;
     }

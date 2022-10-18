@@ -16,10 +16,9 @@ static struct option longopts[] = {
 
 int main(int argc, char* argv[])
 {
-    int opt;
     long nlines = DEFAULT_N_LINES;
 
-    while ((opt = getopt_long(argc, argv, "n:", longopts, NULL)) != -1) {
+    for (int opt = getopt_long(argc, argv, "n:", longopts, NULL); opt != -1; opt = getopt_long(argc, argv, "n:", longopts, NULL)) {
         switch (opt) {
             case 'n':
                 nlines = atol(optarg);
@@ -54,8 +53,7 @@ int main(int argc, char* argv[])
 
 static void do_head(FILE *f, long nlines) {
     if (nlines <= 0) return;
-    int c;
-    while ((c = getc(f)) != EOF) {
+    for (int c = getc(f); c != EOF; c = getc(f)) {
         if (putchar(c) < 0) exit(1);
         if (c == '\n') {
             nlines--;

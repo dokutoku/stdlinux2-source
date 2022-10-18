@@ -5,14 +5,12 @@
 int
 main(int argc, char *argv[])
 {
-    int c;
-
     if ((argc > 2) && (argv[1][0] == 'f')) {
-        while ((c = fgetc(stdin)) != EOF)
+        for (int c = fgetc(stdin); c != EOF; c = fgetc(stdin))
             ;
     }
     else {
-        while ((c = getc(stdin)) != EOF)
+        for (int c = getc(stdin); c != EOF; c = getc(stdin))
             ;
     }
     exit(0);

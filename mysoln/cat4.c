@@ -6,10 +6,9 @@ static void do_cat(FILE *f, int escape);
 
 int main(int argc, char *argv[])
 {
-    int opt;
     int escape = 0;
 
-    while ((opt = getopt(argc, argv, "e")) != -1) {
+    for (int opt = getopt(argc, argv, "e"); opt != -1; opt = getopt(argc, argv, "e")) {
         switch (opt) {
             case 'e':
                 escape = 1;
@@ -40,10 +39,8 @@ int main(int argc, char *argv[])
 }
 
 static void do_cat(FILE *f, int escape) {
-    int c;
-
     if (escape != 0) {
-        while ((c = fgetc(f)) != EOF) {
+        for (int c = fgetc(f); c != EOF; c = fgetc(f)) {
             switch (c) {
                 case '\t':
                     if (fputs("\\t", stdout) == EOF) exit(1);
@@ -57,7 +54,7 @@ static void do_cat(FILE *f, int escape) {
             }
         }
     } else {
-        while ((c = fgetc(f)) != EOF) {
+        for (int c = fgetc(f); c != EOF; c = fgetc(f)) {
             if (putchar(c) < 0) exit(1);
         }
     }

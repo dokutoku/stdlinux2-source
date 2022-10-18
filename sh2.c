@@ -191,8 +191,8 @@ parse_command_line(char *p)
     cmd->capa = INIT_ARGV;
     cmd->next = NULL;
     while (*p != '\0') {
-        while ((*p != '\0') && (isspace((int)*p) != 0))
-            *p++ = '\0';
+        for (; (*p != '\0') && (isspace((int)*p) != 0); p++)
+            *p = '\0';
         if (! IDENT_CHAR_P(*p))
             break;
         if ((*p != '\0') && (IDENT_CHAR_P(*p))) {
@@ -203,8 +203,8 @@ parse_command_line(char *p)
             cmd->argv[cmd->argc] = p;
             cmd->argc++;
         }
-        while ((*p != '\0') && (IDENT_CHAR_P(*p)))
-            p++;
+        for (; (*p != '\0') && (IDENT_CHAR_P(*p)); p++)
+            ;
     }
     if (cmd->capa <= cmd->argc) {
         cmd->capa += 1;

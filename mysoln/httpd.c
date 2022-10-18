@@ -111,8 +111,7 @@ static struct HTTPRequest* read_request(FILE *in) {
     struct HTTPRequest *req = xmalloc(sizeof(struct HTTPRequest));
     read_request_line(req, in);
     req->header = NULL;
-    struct HTTPHeaderField *h;
-    while ((h = read_header_field(in)) != NULL) { // 一番上の Header が一番最後になる
+    for (struct HTTPHeaderField *h = read_header_field(in); h != NULL; h = read_header_field(in)) { // 一番上の Header が一番最後になる
         h->next = req->header;
         req->header = h;
     }

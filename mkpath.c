@@ -48,9 +48,9 @@ make_path(const char *path)
         if (parent_path == NULL) die("strdup");
 
         // Removes duplicated trailing slashes ('/')
-        char *last = parent_path + strlen(parent_path) - 1;
-        while (*last == '/' && last != parent_path) {
-            *last-- = '\0';
+        
+        for (char *last = parent_path + strlen(parent_path) - 1; (*last == '/') && (last != parent_path); last--) {
+            *last = '\0';
         }
 
         if (strcmp(parent_path, "/") == 0) {

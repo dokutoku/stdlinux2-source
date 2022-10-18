@@ -23,8 +23,7 @@ static void do_ls(char *path) {
         perror(path);
         exit(1);
     }
-    struct dirent *ent;
-    while ((ent = readdir(d)) != NULL) {
+    for (struct dirent *ent = readdir(d); ent != NULL; ent = readdir(d)) {
         printf("%s\n", ent->d_name);
     }
     closedir(d);

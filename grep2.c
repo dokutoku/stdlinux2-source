@@ -18,8 +18,7 @@ static int opt_ignorecase = 0;
 int
 main(int argc, char *argv[])
 {
-    int opt;
-    while ((opt = getopt(argc, argv, "iv")) != -1) {
+    for (int opt = getopt(argc, argv, "iv"); opt != -1; opt = getopt(argc, argv, "iv")) {
         switch (opt) {
         case 'i':
             opt_ignorecase = 1;

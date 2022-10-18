@@ -33,8 +33,7 @@ tail(FILE *f, int nlines)
     unsigned char **ringbuf = calloc(nlines, sizeof(char*));
     if (ringbuf == NULL) exit(1);
     unsigned char **p = ringbuf;
-    unsigned char *line;
-    while ((line = readline(f)) != NULL) {
+    for (unsigned char *line = readline(f); line != NULL; line = readline(f)) {
         if (*p != NULL)
             free(*p);
         *p = line;

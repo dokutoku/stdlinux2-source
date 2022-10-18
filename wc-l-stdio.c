@@ -26,9 +26,8 @@ static void
 do_wc_l(FILE *f)
 {
     unsigned long n = 0;
-    int c;
     int prev = '\n';   /* '\n' is for empty file */
-    while ((c = getc(f)) != EOF) {
+    for (int c = getc(f); c != EOF; c = getc(f)) {
         if (c == '\n') {
             n++;
         }

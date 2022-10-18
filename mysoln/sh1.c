@@ -87,10 +87,10 @@ parse_cmd(char *cmdline)
     cmd->argv = xmalloc(sizeof(char*) * INIT_CAPA);
     cmd->capa = INIT_CAPA;
     while (*p != '\0') { // 末端 (\0) になるまで回す
-        while ((*p != '\0') && (isspace((int)*p) != 0)) {
+        for (; (*p != '\0') && (isspace((int)*p) != 0); p++) {
             // 何で必要かわからないけど、ないと echo hoge で死んだ
             // 追記: 末端文字に '\0' を割り当てている
-            *p++ = '\0';
+            *p = '\0';
         }
         if (*p != '\0') {
             if (cmd->capa <= cmd->argc + 1) {   /* +1 for final NULL */
@@ -100,8 +100,8 @@ parse_cmd(char *cmdline)
             cmd->argv[cmd->argc] = p;
             cmd->argc++;
         }
-        while ((*p != '\0') && (isspace((int)*p) == 0)) { // 次の単語までポインタを進める
-            p++;
+        for (; (*p != '\0') && (isspace((int)*p) == 0); p++) { // 次の単語までポインタを進める
+            ;
         }
     }
     cmd->argv[cmd->argc] = NULL; // execvp でつかうために末端にNULLを入れる

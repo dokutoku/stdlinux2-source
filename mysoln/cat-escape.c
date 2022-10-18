@@ -9,8 +9,7 @@ int main(int argc, char const* argv[])
             perror(argv[i]);
             exit(1);
         }
-        int c;
-        while ((c = fgetc(f)) != EOF) {
+        for (int c = fgetc(f); c != EOF; c = fgetc(f)) {
             if (c == '\t') {
                 if (putchar('\\') < 0) exit(1);
                 if (putchar('t') < 0) exit(1);
