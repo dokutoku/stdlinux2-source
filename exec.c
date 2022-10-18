@@ -73,5 +73,5 @@ main(int argc, char *argv[])
         die("execve");
     }
 
-    exit(0);
+    return 0;
 }

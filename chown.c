@@ -16,7 +16,7 @@ main(int argc, char *argv[])
 {
     if (argc < 2) {
         fprintf(stderr, "no user name given\n");
-        exit(1);
+        return 1;
     }
     uid_t uid = get_user_id(argv[1]);
     for (int i = 2; i < argc; i++) {
@@ -24,7 +24,7 @@ main(int argc, char *argv[])
             perror(argv[i]);
         }
     }
-    exit(1);
+    return 1;
 }
 
 static uid_t

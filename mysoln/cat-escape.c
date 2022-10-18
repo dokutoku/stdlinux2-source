@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 int main(int argc, char const* argv[])
 {
@@ -7,18 +6,18 @@ int main(int argc, char const* argv[])
         FILE *f = fopen(argv[i], "r");
         if (f == NULL) {
             perror(argv[i]);
-            exit(1);
+            return 1;
         }
         for (int c = fgetc(f); c != EOF; c = fgetc(f)) {
             if (c == '\t') {
-                if (putchar('\\') < 0) exit(1);
-                if (putchar('t') < 0) exit(1);
+                if (putchar('\\') < 0) return 1;
+                if (putchar('t') < 0) return 1;
             } else if (c == '\n') {
-                if (putchar('$') < 0) exit(1);
-                if (putchar('\n') < 0) exit(1);
-            } else if (putchar(c) < 0) exit(1);
+                if (putchar('$') < 0) return 1;
+                if (putchar('\n') < 0) return 1;
+            } else if (putchar(c) < 0) return 1;
         }
         fclose(f);
     }
-    exit(0);
+    return 0;
 }

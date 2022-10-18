@@ -27,10 +27,10 @@ main(int argc, char *argv[])
             break;
         case 'h':
             fprintf(stdout, "Usage: %s [-n LINES] [FILE ...]\n", argv[0]);
-            exit(0);
+            return 0;
         case '?':
             fprintf(stderr, "%s: unknown option: -%c\n", argv[0], optopt);
-            exit(1);
+            return 1;
         default:
             break;
         }
@@ -42,13 +42,13 @@ main(int argc, char *argv[])
             FILE *f = fopen(argv[i], "r");
             if (f == NULL) {
                 perror(argv[i]);
-                exit(1);
+                return 1;
             }
             do_head(f, nlines);
             fclose(f);
         }
     }
-    exit(0);
+    return 0;
 }
 
 static void

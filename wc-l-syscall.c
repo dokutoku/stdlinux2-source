@@ -17,7 +17,7 @@ main(int argc, char *argv[])
 {
     if (argc < 2) {
         fprintf(stderr, "%s: file name not given\n", argv[0]);
-        exit(1);
+        return 1;
     }
     for (int i = 1; i < argc; i++) {
         char *path = argv[i];
@@ -26,7 +26,7 @@ main(int argc, char *argv[])
         do_word_count(fd, path);
         if (close(fd) < 0) die(path);
     }
-    exit(0);
+    return 0;
 }
 
 #define BUFFER_SIZE 2048

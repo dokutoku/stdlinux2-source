@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 #define N_LINES 3
 #define MAX_LINE_LENGTH 1024
@@ -10,7 +9,7 @@ int main(int argc, char const* argv[])
 {
     if (argc != 1) {
         fprintf(stderr, "Usage: %s < infile\n", argv[0]);
-        exit(1);
+        return 1;
     }
     tail(stdin);
     return 0;

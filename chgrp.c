@@ -17,7 +17,7 @@ main(int argc, char *argv[])
 {
     if (argc < 2) {
         fprintf(stderr, "no group name given\n");
-        exit(1);
+        return 1;
     }
     gid_t gid = get_group_id(argv[1]);
     for (int i = 2; i < argc; i++) {
@@ -25,7 +25,7 @@ main(int argc, char *argv[])
             perror(argv[i]);
         }
     }
-    exit(1);
+    return 1;
 }
 
 static gid_t

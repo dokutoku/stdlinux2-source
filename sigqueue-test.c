@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 #include <signal.h>
 
@@ -32,5 +31,5 @@ main(int argc, char *argv[])
 {
     trap_signal(SIGINT, msg_sleep);
     pause();
-    exit(0);
+    return 0;
 }

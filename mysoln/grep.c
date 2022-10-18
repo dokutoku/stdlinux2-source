@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
 #include <regex.h>
@@ -10,7 +9,7 @@ int main(int argc, char const* argv[])
 {
     if (argc < 2) {
         fputs("no pattern\n", stderr);
-        exit(1);
+        return 1;
     }
     regex_t pat;
     int err = regcomp(&pat, argv[1], REG_EXTENDED | REG_NOSUB | REG_NEWLINE);
@@ -19,7 +18,7 @@ int main(int argc, char const* argv[])
 
         regerror(err, &pat, buf, sizeof buf);
         puts(buf);
-        exit(1);
+        return 1;
     }
     if (argc == 2) {
         do_grep(&pat, stdin);
@@ -28,7 +27,7 @@ int main(int argc, char const* argv[])
             FILE *f = fopen(argv[i], "r");
             if (f == NULL) {
                 perror(argv[i]);
-                exit(1);
+                return 1;
             }
             do_grep(&pat, f);
             fclose(f);

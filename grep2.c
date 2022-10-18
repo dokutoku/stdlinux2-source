@@ -28,7 +28,7 @@ main(int argc, char *argv[])
             break;
         case '?':
             fprintf(stderr, "Usage: %s [-iv] pattern [<file>...]\n", argv[0]);
-            exit(1);
+            return 1;
         default:
             break;
         }
@@ -38,7 +38,7 @@ main(int argc, char *argv[])
 
     if (argc < 1) {
         fputs("no pattern\n", stderr);
-        exit(1);
+        return 1;
     }
     char *pattern = argv[0];
     argc--;
@@ -55,7 +55,7 @@ main(int argc, char *argv[])
 
         regerror(err, &re, buf, sizeof buf);
         puts(buf);
-        exit(1);
+        return 1;
     }
     if (argc == 0) {
         grep_stream(&re, stdin);
@@ -66,7 +66,7 @@ main(int argc, char *argv[])
         }
     }
     regfree(&re);
-    exit(0);
+    return 0;
 }
 
 /* path で示されるファイルを grep する */

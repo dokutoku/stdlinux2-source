@@ -120,17 +120,17 @@ int main(int argc, char *argv[])
                 break;
             case 'h':
                 fprintf(stdout, USAGE, argv[0]);
-                exit(0);
+                return 0;
             case '?':
                 fprintf(stderr, USAGE, argv[0]);
-                exit(1);
+                return 1;
             default:
                 break;
         }
     }
     if (optind != argc - 1) {
         fprintf(stderr, USAGE, argv[0]);
-        exit(1);
+        return 1;
     }
     char *docroot = argv[optind];
 

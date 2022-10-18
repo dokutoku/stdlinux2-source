@@ -39,7 +39,7 @@ main(int argc, char *argv[])
         }
         free_cmd(cmd);
     }
-    exit(0);
+    return 0;
 }
 
 static void

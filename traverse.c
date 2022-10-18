@@ -25,14 +25,14 @@ main(int argc, char *argv[])
 {
     if (argc != 2) {
         fprintf(stderr, "Usage: %s <dir>\n", argv[0]);
-        exit(1);
+        return 1;
     }
     program_name = argv[0];
     struct strbuf *pathbuf = strbuf_new();
     strbuf_realloc(pathbuf, strlen(argv[1]));
     strcpy(pathbuf->ptr, argv[1]);
     traverse(pathbuf);
-    exit(0);
+    return 0;
 }
 
 static void

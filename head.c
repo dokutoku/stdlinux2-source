@@ -8,10 +8,10 @@ main(int argc, char *argv[])
 {
     if (argc != 2) {
         fprintf(stderr, "Usage: %s n\n", argv[0]);
-        exit(1);
+        return 1;
     }
     do_head(stdin, atol(argv[1]));
-    exit(0);
+    return 0;
 }
 
 static void

@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 static void do_wc_l(FILE *f);
 
@@ -13,13 +12,13 @@ main(int argc, char *argv[])
             FILE *f = fopen(argv[i], "r");
             if (f == NULL) {
                 perror(argv[i]);
-                exit(1);
+                return 1;
             }
             do_wc_l(f);
             fclose(f);
         }
     }
-    exit(0);
+    return 0;
 }
 
 static void

@@ -23,7 +23,7 @@ main(int argc, char *argv[])
 {
     if (argc < 2) {
         fputs("no pattern\n", stderr);
-        exit(1);
+        return 1;
     }
     regex_t pat;
     int err = regcomp(&pat, argv[1], REG_EXTENDED | REG_NEWLINE);
@@ -32,7 +32,7 @@ main(int argc, char *argv[])
 
         regerror(err, &pat, buf, sizeof buf);
         puts(buf);
-        exit(1);
+        return 1;
     }
     if (argc == 2) {
         do_slice(&pat, stdin);
@@ -46,7 +46,7 @@ main(int argc, char *argv[])
         }
     }
     regfree(&pat);
-    exit(0);
+    return 0;
 }
 
 static void

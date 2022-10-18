@@ -21,12 +21,12 @@ main(int argc, char *argv[])
     setlocale(LC_CTYPE, "");
     if (argc < 2) {
         fputs("no pattern\n", stderr);
-        exit(1);
+        return 1;
     }
     wchar_t pattern[1024];
     if (mbstowcs(pattern, argv[1], 1024) == (size_t)(-1)) {
         fprintf(stderr, "mbstowcs failed #1\n");
-        exit(1);
+        return 1;
     }
     if (argc == 2) {
         do_grep(pattern, stdin);
@@ -36,13 +36,13 @@ main(int argc, char *argv[])
             FILE *f = fopen(argv[i], "r");
             if (f == NULL) {
                 perror(argv[i]);
-                exit(1);
+                return 1;
             }
             do_grep(pattern, f);
             fclose(f);
         }
     }
-    exit(0);
+    return 0;
 }
 
 static void

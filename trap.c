@@ -32,5 +32,5 @@ main(int argc, char *argv[])
 {
     trap_signal(SIGINT, print_exit);
     pause();
-    exit(0);
+    return 0;
 }

@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 #include <signal.h>
 
@@ -14,5 +13,5 @@ main(int argc, char *argv[])
 {
     signal(SIGINT, showsig);
     pause();
-    exit(0);
+    return 0;
 }

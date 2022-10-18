@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -16,5 +15,5 @@ main(int argc, char *argv[])
         n = write(STDOUT_FILENO, buf, n);
     }
     close(fd);
-    exit(0);
+    return 0;
 }

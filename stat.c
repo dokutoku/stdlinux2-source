@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <time.h>
@@ -11,12 +10,12 @@ main(int argc, char *argv[])
 {
     if (argc != 2) {
         fprintf(stderr, "wrong argument\n");
-        exit(1);
+        return 1;
     }
     struct stat st;
     if (lstat(argv[1], &st) < 0) {
         perror(argv[1]);
-        exit(1);
+        return 1;
     }
     printf("type\t%o (%s)\n", (st.st_mode & S_IFMT), filetype(st.st_mode));
     printf("mode\t%o\n", st.st_mode & ~S_IFMT);
@@ -32,7 +31,7 @@ main(int argc, char *argv[])
     printf("atime\t%s", ctime(&st.st_atime));
     printf("mtime\t%s", ctime(&st.st_mtime));
     printf("ctime\t%s", ctime(&st.st_ctime));
-    exit(0);
+    return 0;
 }
 
 static char*

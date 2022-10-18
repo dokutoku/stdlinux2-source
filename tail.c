@@ -3,7 +3,6 @@
 */
 
 #include <stdio.h>
-#include <stdlib.h>
 
 #define N_LINES 10
 #define MAX_LINE_LENGTH 1024
@@ -15,10 +14,10 @@ main(int argc, char *argv[])
 {
     if (argc != 1) {
         fprintf(stderr, "Usage: %s < infile\n", argv[0]);
-        exit(1);
+        return 1;
     }
     tail(stdin);
-    exit(0);
+    return 0;
 }
 
 static char ring_buffer[N_LINES][MAX_LINE_LENGTH];

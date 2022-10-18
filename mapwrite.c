@@ -16,7 +16,7 @@ main(int argc, char *argv[])
     int fd = open(DATAFILE, O_WRONLY|O_CREAT, 0666);
     if (fd < 0) {
         perror(DATAFILE);
-        exit(1);
+        return 1;
     }
     write(fd, "NO\n", 3);
     close(fd);
@@ -25,12 +25,12 @@ main(int argc, char *argv[])
     fd = open(DATAFILE, O_RDWR);
     if (fd < 0) {
         perror(DATAFILE);
-        exit(1);
+        return 1;
     }
     char *ptr = (char*)mmap(0, len, PROT_WRITE, MAP_SHARED, fd, 0);
     if (ptr == NULL) {
         perror("mmap(2)");
-        exit(1);
+        return 1;
     }
     close(fd);
     ptr[0] = 'O';
@@ -41,5 +41,5 @@ main(int argc, char *argv[])
     /* cat it */
     system("cat " DATAFILE);
 
-    exit(0);
+    return 0;
 }

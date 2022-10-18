@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 int
 main(int argc, char *argv[])
@@ -7,5 +6,5 @@ main(int argc, char *argv[])
     int *p = NULL;
 
     printf("%d\n", *p);
-    exit(0);
+    return 0;
 }

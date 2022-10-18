@@ -4,7 +4,6 @@
 */
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <sys/types.h>
 #include <utime.h>
 
@@ -15,9 +14,9 @@ main(int argc, char *argv[])
         if (utime(argv[i], NULL) < 0) {
             perror(argv[i]);
             /* We do not exit here...
-             * exit(1);
+             * return 1;
              */
         }
     }
-    exit(0);
+    return 0;
 }

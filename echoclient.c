@@ -14,7 +14,7 @@ main(int argc, char *argv[])
     if (argc != 3) {
         fprintf(stderr, "%s: error: wrong number of argument: %d for 2\n", argv[0], argc - 1);
         fprintf(stderr, "Usage: %s HOST MESSAGE\n", argv[0]);
-        exit(1);
+        return 1;
     }
     char *host = argv[1];
     char *msg = argv[2];
@@ -23,7 +23,7 @@ main(int argc, char *argv[])
     FILE *f = fdopen(sock, "w+");
     if (f == NULL) {
         perror("fdopen(3)");
-        exit(1);
+        return 1;
     }
 
     fprintf(f, "%s\n", msg);
@@ -33,7 +33,7 @@ main(int argc, char *argv[])
     fgets(buf, sizeof buf, f);
     fclose(f);
     fputs(buf, stdout);
-    exit(0);
+    return 0;
 }
 
 static int

@@ -8,5 +8,5 @@ main(int argc, char *argv[])
         char *val = getenv(argv[i]);
         if (val != NULL) printf("%s\n", val);
     }
-    exit(0);
+    return 0;
 }

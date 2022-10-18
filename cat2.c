@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 int
 main(int argc, char *argv[])
@@ -8,12 +7,12 @@ main(int argc, char *argv[])
         FILE *f = fopen(argv[i], "r");
         if (f == NULL) {
             perror(argv[i]);
-            exit(1);
+            return 1;
         }
         for (int c = fgetc(f); c != EOF; c = fgetc(f)) {
-            if (putchar(c) < 0) exit(1);
+            if (putchar(c) < 0) return 1;
         }
         fclose(f);
     }
-    exit(0);
+    return 0;
 }

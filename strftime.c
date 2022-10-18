@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <time.h>
 #include <locale.h>
 #include <string.h>
@@ -57,5 +56,5 @@ main(int argc, char *argv[])
                 puts(buf);
         }
     }
-    exit(0);
+    return 0;
 }

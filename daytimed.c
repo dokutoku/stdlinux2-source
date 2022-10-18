@@ -38,7 +38,7 @@ main(int argc, char *argv[])
     int sock = accept(server, (struct sockaddr*)&addr, &addrlen);
     if (sock < 0) {
         perror("accept(2)");
-        exit(1);
+        return 1;
     }
     time_t t;
     time(&t);
@@ -47,7 +47,7 @@ main(int argc, char *argv[])
     write(sock, timestr, strlen(timestr));
     close(sock);
     close(server);
-    exit(0);
+    return 0;
 }
 
 static int

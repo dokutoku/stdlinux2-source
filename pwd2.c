@@ -32,9 +32,9 @@ main(int argc, char *argv[])
     char *path = my_getcwd();
     if (path == NULL) {
         perror("getcwd");
-        exit(1);
+        return 1;
     }
     puts(path);
     free(path);
-    exit(0);
+    return 0;
 }

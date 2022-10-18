@@ -15,13 +15,13 @@ main(int argc, char *argv[])
     FILE *f = fdopen(sock, "r");
     if (f == NULL) {
         perror("fdopen(3)");
-        exit(1);
+        return 1;
     }
     char buf[1024];
     fgets(buf, sizeof buf, f);
     fclose(f);
     fputs(buf, stdout);
-    exit(0);
+    return 0;
 }
 
 static int

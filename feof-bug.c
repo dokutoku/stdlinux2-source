@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 #define MAXLINE 16
 
@@ -13,5 +12,5 @@ main(int argc, char *argv[])
         fgets(buf, MAXLINE, f);
         fputs(buf, stdout);
     }
-    exit(0);
+    return 0;
 }

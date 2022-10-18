@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
 #define _GNU_SOURCE
@@ -26,12 +25,12 @@ main(int argc, char *argv[])
 {
     if (argc < 2) {
         fprintf(stderr, "missing dirname\n");
-        exit(1);
+        return 1;
     }
     int fd = open(argv[1], O_RDONLY);
     if (fd < 0) {
         perror(argv[1]);
-        exit(1);
+        return 1;
     }
     for (;;) {
         char buf[1024];
@@ -39,7 +38,7 @@ main(int argc, char *argv[])
         int n = syscall(__NR_getdents, fd, buf, sizeof buf);
         if (n < 0) {
             perror("getdents(2)");
-            exit(1);
+            return 1;
         }
         if (n == 0) break;
 #ifdef PRETTY_PRINT
@@ -48,7 +47,7 @@ main(int argc, char *argv[])
         write(STDOUT_FILENO, buf, n);
 #endif
     }
-    exit(0);
+    return 0;
 }
 
 #ifdef PRETTY_PRINT

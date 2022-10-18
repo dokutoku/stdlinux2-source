@@ -8,7 +8,7 @@ main(int argc, char *argv[])
 {
     if (argc < 2) {
         fprintf(stderr, "Usage: %s n [file file...]\n", argv[0]);
-        exit(1);
+        return 1;
     }
     long nlines = atol(argv[1]);
     if (argc == 2) {
@@ -18,13 +18,13 @@ main(int argc, char *argv[])
             FILE *f = fopen(argv[i], "r");
             if (f == NULL) {
                 perror(argv[i]);
-                exit(1);
+                return 1;
             }
             do_head(f, nlines);
             fclose(f);
         }
     }
-    exit(0);
+    return 0;
 }
 
 static void

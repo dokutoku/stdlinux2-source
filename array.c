@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 int
 main(int argc, char *argv[])
@@ -11,5 +10,5 @@ char *str2 = buf;
 
     printf("%s", str1);
     printf("%s", str2);
-    exit(0);
+    return 0;
 }

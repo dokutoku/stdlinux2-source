@@ -35,5 +35,5 @@ main(int argc, char *argv[])
         readshow(0);
         readshow(newfd);
     }
-    exit(0);
+    return 0;
 }

@@ -28,12 +28,12 @@ main(int argc, char *argv[])
     gid_t *buf = malloc(sizeof(gid_t) * group_max);
     if (buf == NULL) {
         fprintf(stderr, "malloc failed\n");
-        exit(1);
+        return 1;
     }
     int n = getgroups(group_max, buf);
     if (n < 0) {
         perror("getgroups");
-        exit(1);
+        return 1;
     }
     printf(" groups=");
     char *comma = "";
@@ -43,7 +43,7 @@ main(int argc, char *argv[])
     }
     printf("\n");
 
-    exit(0);
+    return 0;
 }
 
 static char *

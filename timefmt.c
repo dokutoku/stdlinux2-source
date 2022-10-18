@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
 #include <sys/time.h>
@@ -29,5 +28,5 @@ main(int argc, char *argv[])
     printf("asctime(LOC) = %s", asctime(tm));
     printf("mktime(LOC)  = %ld\n", (long)t);
 
-    exit(0);
+    return 0;
 }

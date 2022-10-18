@@ -51,7 +51,7 @@ main(int argc, char *argv[])
     for (;;) {
         prompt();
     }
-    exit(0);
+    return 0;
 }
 
 #define LINEBUF_MAX 2048

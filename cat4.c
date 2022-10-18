@@ -26,7 +26,7 @@ main(int argc, char *argv[])
             break;
         case '?':
             fprintf(stderr, "Usage: %s [-e] [file...]\n", argv[0]);
-            exit(1);
+            return 1;
         default:
             break;
         }
@@ -41,13 +41,13 @@ main(int argc, char *argv[])
             FILE *f = fopen(argv[i], "r");
             if (f == NULL) {
                 perror(argv[i]);
-                exit(1);
+                return 1;
             }
             do_cat(f, escape);
             fclose(f);
         }
     }
-    exit(0);
+    return 0;
 }
 
 static void

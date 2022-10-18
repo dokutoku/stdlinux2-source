@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 #include <limits.h>
 
@@ -10,8 +9,8 @@ main(int argc, char *argv[])
 
     if (getcwd(buf, PATH_MAX) == NULL) {
         perror("getcwd");
-        exit(1);
+        return 1;
     }
     puts(buf);
-    exit(0);
+    return 0;
 }

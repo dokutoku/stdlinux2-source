@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 extern int a(void);
 extern int b(void);
@@ -9,5 +8,5 @@ main(int argc, char **argv)
 {
     a();
     b();
-    exit(0);
+    return 0;
 }
